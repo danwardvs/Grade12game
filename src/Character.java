@@ -2,6 +2,7 @@
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.World;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.joints.WeldJointDef;
 import java.util.Random;
@@ -99,7 +100,37 @@ public class Character extends Box {
 		 }
 		
 		 if(alive){
+			 
 			 bullet_time+=delta;
+			 
+			 if(Mouse.isButtonDown(0))
+				 gameController.createBox(new Box(gameWorld,BodyType.DYNAMIC,false,Mouse.getX()/20-20,Mouse.getY()/20-15,2,2,0,r,g,b,1));
+
+			 
+			 if (Keyboard.isKeyDown(Keyboard.KEY_W)){
+				 
+				 
+				 gameWorld.setGravity(new Vec2(gameWorld.getGravity().x,gameWorld.getGravity().y+0.05f));
+
+			 }
+			 
+			 if (Keyboard.isKeyDown(Keyboard.KEY_A)){
+				 gameWorld.setGravity(new Vec2(gameWorld.getGravity().x-0.05f,gameWorld.getGravity().y));
+
+			 }
+			 
+			 if (Keyboard.isKeyDown(Keyboard.KEY_D)){
+				 gameWorld.setGravity(new Vec2(gameWorld.getGravity().x+0.05f,gameWorld.getGravity().y));
+
+			 }
+			 
+			 if (Keyboard.isKeyDown(Keyboard.KEY_S)){
+				 gameWorld.setGravity(new Vec2(gameWorld.getGravity().x,gameWorld.getGravity().y-0.05f));
+
+			 }
+			 
+			 
+			 
 			 if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT) || Keyboard.isKeyDown(Keyboard.KEY_D) ){
 				 applyImpulse(movement_speed,0);
 				 direction=true;
@@ -109,7 +140,7 @@ public class Character extends Box {
 					direction=false;
 			 }
 			 //System.out.println(Feet);
-			 if (Keyboard.isKeyDown(Keyboard.KEY_UP) || Keyboard.isKeyDown(Keyboard.KEY_W)){
+			 if (Keyboard.isKeyDown(Keyboard.KEY_UP)){
 				 if(body.getLinearVelocity().y<=0.1f && body.getLinearVelocity().y>=-0.1f && Feet.getBody().getContactList()!=null)
 					applyImpulse(0,2000);
 			 }

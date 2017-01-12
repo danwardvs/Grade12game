@@ -221,6 +221,7 @@ public class WorldController {
 	    public void start() {
 	    	
 	    	
+	    	
 	    	 getDelta(); // call once before loop to initialise lastFrame
 	         lastFPS = getTime(); // call before loop to initialise fps timer
 	    	
@@ -234,6 +235,8 @@ public class WorldController {
 		    PolygonShape groundBox = new PolygonShape();
 		    groundBox.setAsBox(800, 0);
 		    groundBody.createFixture(groundBox, 0);
+	    	gameWorld.setSleepingAllowed(false);
+
 		    
 		    
 		    

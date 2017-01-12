@@ -18,6 +18,7 @@ public class MouseHandler {
 	private float sensitivity = 0.5f;
 	private boolean has_bounds=true;
 	private Texture cursor;
+	boolean USING_CURSOR=false;
 	
 	public MouseHandler(){
 		
@@ -29,7 +30,8 @@ public class MouseHandler {
 	    }  
 		
 	    Mouse.setGrabbed(true);
-	    cursor = loadTexture("Cursor.png");
+	    if(USING_CURSOR)
+	    	cursor = loadTexture("Cursor.png");
 	    
 	}
 	
@@ -50,33 +52,7 @@ public class MouseHandler {
 		is_visible = newVisibility;
 	}
 	
-	public void update(){
-		double mouse_delta_x = Mouse.getDX();
-		double mouse_delta_y = Mouse.getDY();
-		
-		left_mouse_down = Mouse.isButtonDown(0);
-		right_mouse_down = Mouse.isButtonDown(1);
-
-		
-		mouse_x += mouse_delta_x*sensitivity;
-		mouse_y += -mouse_delta_y*sensitivity;
-		
-		if(has_bounds){
-			if(mouse_x<0)
-				mouse_x=0;
-			if(mouse_x>SCREEN_W-1)
-				mouse_x=SCREEN_W-1;
-			
-			if(mouse_y>SCREEN_H-1)
-				mouse_y=SCREEN_H-1;
-			if(mouse_y<0)
-				mouse_y=0;
-		}
-		
-		
-
-		
-	}
+	
 	public void draw(){
 		
 	
@@ -96,13 +72,15 @@ public class MouseHandler {
 		}
 	}
 	
-	public int getX(){
-		return mouse_x;
+	public int getWorldX(){
+		return (Mouse.getX()/20)-20;
 	}
 	
-	public int getY(){
-		return mouse_y;
+	public int getWorldY(){
+		return (Mouse.getY()/20)-15;
 	}
+	
+	//public int get
 	
 	public boolean getLeftMouseDown(){
 		return left_mouse_down;

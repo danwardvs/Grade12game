@@ -4,3 +4,6 @@
 /Level.class
 /Projectile.class
 /WorldController.class
+/KeyboardHandler.class
+/MouseHandler.class
+/Main.class

@@ -7,6 +7,7 @@ import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.World;
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -284,12 +285,15 @@ public class WorldController {
 	    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 	    GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 	    
-	    Sys.alert("Controls","WASD/Arrow Keys to move\nSpace to shoot\nR to retry level\n");
+	    //Sys.alert("Controls","WASD/Arrow Keys to move\nSpace to shoot\nR to retry level\n");
 	    
-	    while (!Display.isCloseRequested()) {
+	    boolean exit=false;
+	    
+	    while (!Display.isCloseRequested() && !exit) {
 	    	
 	    	
-	    	
+	    	if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
+	    		exit=true;
 	    	float delta = getDelta();
 	    	//System.out.print(delta/1000);
 	    	//System.out.println(" " + timeStep);
@@ -333,17 +337,4 @@ public class WorldController {
 	    Display.destroy();
 	    }
 	    
-	   
-	  
-	
-	public static void main(String[] args) {
-
-		gameController = new WorldController();
-	       gameController.start();
-	    
-	    
-			
-	    
-	}
-
 }

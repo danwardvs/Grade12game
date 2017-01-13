@@ -32,7 +32,7 @@ public class Character extends Box {
 	public Character(WorldController newWorldController, World newWorld, MouseHandler newMouse, boolean newIsSensor, float newX, float newY, float newWidth, float newHeight,
 		
 		float newAngle, float newR, float newG, float newB, float newA) {
-		super(newWorld, BodyType.DYNAMIC, newIsSensor, newX, newY, newWidth, newHeight, newAngle, newR, newG, newB, newA);
+		super(newWorld, BodyType.KINEMATIC, newIsSensor, newX, newY, newWidth, newHeight, newAngle, newR, newG, newB, newA);
 		gameWorld = newWorld;
 		gameMouse = newMouse;
 		gameController = newWorldController;

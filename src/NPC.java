@@ -23,7 +23,18 @@ public class NPC extends Box {
 	Box RightThigh;
 	Box RightShin;
 	Box RightFoot;
-
+	
+	Box RightUpperArm;
+	Box RightForearm;
+	Box RightHand;
+	
+	Box LeftUpperArm;
+	Box LeftForearm;
+	Box LeftHand;
+	
+	Box Neck;
+	Box Head;
+	
 	public NPC(World newWorld, Character newCharacter, WorldController newWorldController, String newType, Boolean newDirection, BodyType newBodyType, boolean newIsSensor, float newX, float newY, float newWidth,
 			float newHeight, float newAngle, float newR, float newG, float newB, float newA) {
 		super(newWorld, newBodyType, newIsSensor, newX, newY, newWidth, newHeight, newAngle, newR, newG, newB, newA);
@@ -41,11 +52,23 @@ public class NPC extends Box {
 		
 		LeftThigh = createBodyPart(body,newX-0.25f,newY-1f,0.2f,0.5f,newX-0.25f,newY-0.5f,-0.2f,0);
 		LeftShin = createBodyPart(LeftThigh.getBody(),newX-0.25f,newY-2f,0.2f,0.5f,newX-0.25f,newY-1.5f,-0.2f,0);
-		LeftFoot = createBodyPart(LeftShin.getBody(),newX-0.5f,newY-2.5f,0.5f,0.2f,newX-0.25f,newY-2.5f,-0.2f,0);
+		LeftFoot = createBodyPart(LeftShin.getBody(),newX-0.5f,newY-2.5f,0.75f,0.2f,newX-0.25f,newY-2.5f,-0.2f,0);
 
 		RightThigh = createBodyPart(body,newX+0.25f,newY-1f,0.2f,0.5f,newX+0.25f,newY-0.5f,0,0.2f);
 		RightShin = createBodyPart(RightThigh.getBody(),newX+0.25f,newY-2f,0.2f,0.5f,newX+0.25f,newY-1.5f,0,0.2f);
-		RightFoot = createBodyPart(RightShin.getBody(),newX+0.5f,newY-2.5f,0.5f,0.2f,newX+0.25f,newY-2.5f,0,0.2f);
+		RightFoot = createBodyPart(RightShin.getBody(),newX+0.5f,newY-2.5f,0.75f,0.2f,newX+0.25f,newY-2.5f,0,0.2f);
+		
+		RightUpperArm = createBodyPart(body,newX-0.75f,newY,0.2f,0.5f,newX-0.75f,newY+0.25f,false);
+		RightForearm = createBodyPart(RightUpperArm.getBody(),newX-0.75f,newY-1f,0.2f,0.5f,newX-0.75f,newY-0.25f,false);
+		RightHand = createBodyPart(RightForearm.getBody(),newX-0.75f,newY-1.5f,0.3f,0.3f,newX-0.75f,newY-1.25f,false);
+		
+		LeftUpperArm = createBodyPart(body,newX+0.75f,newY,0.2f,0.5f,newX+0.75f,newY+0.25f,false);
+		LeftForearm = createBodyPart(LeftUpperArm.getBody(),newX+0.75f,newY-1f,0.2f,0.5f,newX+0.75f,newY-0.25f,false);
+		LeftHand = createBodyPart(LeftForearm.getBody(),newX+0.75f,newY-1.5f,0.3f,0.3f,newX+0.75f,newY-1.25f,false);
+		
+		Neck = createBodyPart(body,newX,newY+0.75f,0.3f,0.2f,newX,newY+0.75f,true);
+		
+		Head = createBodyPart(Neck.body,newX,newY+1.25f,0.4f,0.4f,newX,newY+1.25f,true);
 		
 		
        
@@ -77,6 +100,33 @@ public class NPC extends Box {
 		return newBox;	
 		
 	}
+	
+	public Box createBodyPart(Body newBody,float newX, float newY,float newWidth, float newHeight, float newAnchorX, float newAnchorY, boolean newLimits){
+		
+		Box newBox = new Box(gameWorld,BodyType.DYNAMIC,false,newX,newY,newWidth,newHeight,0,0,1,0,1);
+		//newBox.body.setAngularDamping(1000000000);
+		//newBox.body.setLinearDamping(10);
+		gameController.createBox(newBox);
+		
+		Vec2 Anchor = new Vec2(newAnchorX,newAnchorY);
+		
+		RevoluteJointDef jointDef = new RevoluteJointDef();
+		jointDef.initialize(newBody, newBox.body, Anchor);
+        jointDef.collideConnected = false;
+        jointDef.enableLimit=newLimits;
+        jointDef.upperAngle=0;
+        jointDef.lowerAngle=0;
+        jointDef.referenceAngle=0;
+    
+        
+        gameWorld.createJoint(jointDef);
+
+        
+
+		return newBox;	
+		
+	}
+	
 	
 	public void createProjectile(float newSpeed, float newAngle, float newX, float newY){
 		Projectile newProjectile = new Projectile(gameWorld,BodyType.DYNAMIC,gameCharacter,"Enemy",false,getX()+newX,getY()+newY,0.2f,0.2f,0,1,0f,0f,1,960);

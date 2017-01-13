@@ -49,7 +49,7 @@ public class Main {
 	     */
 	    public void updateFPS() {
 	        if (getTime() - lastFPS > 1000) {
-	            //Display.setTitle("FPs"+fps);
+	            Display.setTitle("FPS: "+fps);
 
 	            fps = 0;
 	            lastFPS += 1000;
@@ -103,12 +103,15 @@ public class Main {
 		while (!Display.isCloseRequested() && !exit) {
 		    
 			float delta = getDelta();
+			updateFPS();
 			
 		   if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
 		    	exit=true;
 		    
 		       gameController.update((int)delta);
-				gameWorld.step(delta/1000, 2, 6);
+		       
+		       //Haxx for stepping world but idek
+		       gameWorld.step(delta/1000, 2, 6);
 
 		       gameController.draw();
 		        

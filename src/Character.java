@@ -14,6 +14,7 @@ public class Character extends Box {
 	float movement_speed=50;
 	World gameWorld;
 	WorldController gameController;
+	MouseHandler gameMouse;
 	int bullet_time;
 	int bullet_time_delay=300;
 	Box Feet;
@@ -28,15 +29,16 @@ public class Character extends Box {
 	
 	Random rn = new Random();
 
-	public Character(WorldController newWorldController, World newWorld, boolean newIsSensor, float newX, float newY, float newWidth, float newHeight,
+	public Character(WorldController newWorldController, World newWorld, MouseHandler newMouse, boolean newIsSensor, float newX, float newY, float newWidth, float newHeight,
 		
 		float newAngle, float newR, float newG, float newB, float newA) {
 		super(newWorld, BodyType.DYNAMIC, newIsSensor, newX, newY, newWidth, newHeight, newAngle, newR, newG, newB, newA);
 		gameWorld = newWorld;
+		gameMouse = newMouse;
 		gameController = newWorldController;
 		body.setFixedRotation(true);
 		
-		Feet = new Box(gameWorld,BodyType.DYNAMIC,true,newX,newY-newHeight,newWidth,0.5f,0,0,1,0,0);			
+		Feet = new Box(gameWorld,BodyType.DYNAMIC,true,newX,newY-newHeight,newWidth,0.5f,0,0,1,0,0);	
 		
 		Vec2 FeetAnchor = new Vec2(0,newHeight);
 		gameController.createBox(Feet);
@@ -103,29 +105,29 @@ public class Character extends Box {
 			 
 			 bullet_time+=delta;
 			 
-			 if(Mouse.isButtonDown(0))
-				 gameController.createBox(new Box(gameWorld,BodyType.DYNAMIC,false,Mouse.getX()/20-20,Mouse.getY()/20-15,2,2,0,r,g,b,1));
+			 if(gameMouse.getLeftMouseDown())
+				 gameController.createBox(new Box(gameWorld,BodyType.DYNAMIC,false,Mouse.getX()/20-20,Mouse.getY()/20-15,0.5f,0.5f,0,r,g,b,1));
 
 			 
 			 if (Keyboard.isKeyDown(Keyboard.KEY_W)){
 				 
 				 
-				 gameWorld.setGravity(new Vec2(gameWorld.getGravity().x,gameWorld.getGravity().y+0.05f));
+				 gameWorld.setGravity(new Vec2(gameWorld.getGravity().x,gameWorld.getGravity().y+0.5f));
 
 			 }
 			 
 			 if (Keyboard.isKeyDown(Keyboard.KEY_A)){
-				 gameWorld.setGravity(new Vec2(gameWorld.getGravity().x-0.05f,gameWorld.getGravity().y));
+				 gameWorld.setGravity(new Vec2(gameWorld.getGravity().x-0.5f,gameWorld.getGravity().y));
 
 			 }
 			 
 			 if (Keyboard.isKeyDown(Keyboard.KEY_D)){
-				 gameWorld.setGravity(new Vec2(gameWorld.getGravity().x+0.05f,gameWorld.getGravity().y));
+				 gameWorld.setGravity(new Vec2(gameWorld.getGravity().x+0.5f,gameWorld.getGravity().y));
 
 			 }
 			 
 			 if (Keyboard.isKeyDown(Keyboard.KEY_S)){
-				 gameWorld.setGravity(new Vec2(gameWorld.getGravity().x,gameWorld.getGravity().y-0.05f));
+				 gameWorld.setGravity(new Vec2(gameWorld.getGravity().x,gameWorld.getGravity().y-0.5f));
 
 			 }
 			 

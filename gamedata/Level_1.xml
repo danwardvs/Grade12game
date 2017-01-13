@@ -85,7 +85,7 @@
 		<bodytype>KINEMATIC</bodytype>
 	</object>
 
-	<object type="Item">
+	<object type="NPC">
 		<itemtype>Door</itemtype>
 		<x>4.1</x>
 		<y>4.2</y>
@@ -98,7 +98,7 @@
 		<bodytype>KINEMATIC</bodytype>
 	</object>
 	
-	<object type="Item">
+	<object type="NPC">
 		<itemtype>Star</itemtype>
 		<x>-18.5</x>
 		<y>-14</y>
@@ -111,7 +111,7 @@
 		<bodytype>DYNAMIC</bodytype>
 	</object>
 	
-	<object type="Item">
+	<object type="NPC">
 		<itemtype>Star</itemtype>
 		<x>5</x>
 		<y>-14</y>
@@ -126,7 +126,7 @@
 	
 	
 	
-	<object type="Item">
+	<object type="NPC">
 		<itemtype>Star</itemtype>
 		<x>-10</x>
 		<y>-6</y>
@@ -139,7 +139,7 @@
 		<bodytype>DYNAMIC</bodytype>
 	</object>
 	
-	<object type="Item">
+	<object type="NPC">
 		<itemtype>Star</itemtype>
 		<x>-6</x>
 		<y>-6</y>
@@ -152,7 +152,7 @@
 		<bodytype>DYNAMIC</bodytype>
 	</object>
 	
-	<object type="Item">
+	<object type="NPC">
 		<itemtype>Star</itemtype>
 		<x>-2</x>
 		<y>2</y>
@@ -165,7 +165,7 @@
 		<bodytype>DYNAMIC</bodytype>
 	</object>
 	
-	<object type="Item">
+	<object type="NPC">
 		<itemtype>Star</itemtype>
 		<x>2</x>
 		<y>2</y>
@@ -178,7 +178,7 @@
 		<bodytype>DYNAMIC</bodytype>
 	</object>
 	
-	<object type="Item">
+	<object type="NPC">
 		<itemtype>Star</itemtype>
 		<x>-2</x>
 		<y>-2</y>
@@ -191,7 +191,7 @@
 		<bodytype>DYNAMIC</bodytype>
 	</object>
 	
-	<object type="Item">
+	<object type="NPC">
 		<itemtype>Star</itemtype>
 		<x>-6</x>
 		<y>-3</y>
@@ -204,7 +204,7 @@
 		<bodytype>DYNAMIC</bodytype>
 	</object>
 	
-	<object type="Item">
+	<object type="NPC">
 		<itemtype>Star</itemtype>
 		<x>-14</x>
 		<y>-10</y>
@@ -217,7 +217,7 @@
 		<bodytype>DYNAMIC</bodytype>
 	</object>
 	
-	<object type="Item">
+	<object type="NPC">
 		<itemtype>Star</itemtype>
 		<x>-10</x>
 		<y>-10</y>

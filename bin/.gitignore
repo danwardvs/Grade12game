@@ -1,9 +1,1 @@
-/Box.class
-/Character.class
-/Item.class
-/Level.class
-/Projectile.class
-/WorldController.class
-/KeyboardHandler.class
-/MouseHandler.class
-/Main.class
+/NPC.class

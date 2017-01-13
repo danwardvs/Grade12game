@@ -29,7 +29,7 @@ public class WorldController {
 	int BOX_AMOUNT = 25;
 	List<Box> gameBoxes = new ArrayList<Box>();
 	List<Projectile> gameProjectiles = new ArrayList<Projectile>();
-	List<Item> gameItems = new ArrayList<Item>();
+	List<NPC> gameNPCs = new ArrayList<NPC>();
 	Character gameCharacter;
 	static World gameWorld;
 	Level gameLevel;
@@ -47,7 +47,7 @@ public class WorldController {
 	
     public void start() {
     	
-        gameLevel  = new Level(this,gameWorld,gameCharacter);
+        gameLevel  = new Level(this,gameWorld,gameMouse,gameCharacter);
 	    gameLevel.load_level("gamedata/Level_"+level+".xml");
 		
 
@@ -63,14 +63,7 @@ public class WorldController {
     	
     	
     	
-      
-		
-
-        Display.setTitle("Cubes Remaining: " + score);
-
-	    if(gameMouse.getLeftMouseDown()){
-	    	Display.setTitle("X: " + (gameMouse.getWorldX())+ "Y: " + (gameMouse.getWorldY()));
-	    }
+  
 		 
 		gameCharacter.update(delta);
 		
@@ -92,26 +85,26 @@ public class WorldController {
 
 		}
 		
-		for(int j = 0; j < gameItems.size(); j++)
+		for(int j = 0; j < gameNPCs.size(); j++)
 		{
-		    Item newItem = gameItems.get(j);
+		    NPC newNPC = gameNPCs.get(j);
 		    
-		    int result = newItem.update();
+		    int result = newNPC.update();
 		    if(buttonPressed){
-		    	if(newItem.getType().equals("ButtonTrigger")){
-		    		newItem.deleteBody();
-		    		gameItems.remove(j);
+		    	if(newNPC.getType().equals("ButtonTrigger")){
+		    		newNPC.deleteBody();
+		    		gameNPCs.remove(j);
 		    	}
 		    }
 		    
 		    if(result==1){			    	
 		    	score--;
-		        gameItems.remove(j);
+		        gameNPCs.remove(j);
 		        
 		        break;
 		        
 		    }else if(result==2){
-		    	gameItems.remove(j);
+		    	gameNPCs.remove(j);
 		    	if(level!=3){
 		    		level++;
 			    	clearWorld();
@@ -131,11 +124,8 @@ public class WorldController {
 
 		}
 		//System.out.println(gameProjectiles.size());
-		try{
-		}catch(Exception e){
-			System.out.println(e);
-		}
-
+		
+		
 	 }
 			 
 	public void draw(){
@@ -155,11 +145,12 @@ public class WorldController {
         	projectile.draw();
         }
         
-        for(Box item: gameItems){
-        	item.draw();
+        for(Box NPC: gameNPCs){
+        	NPC.draw();
         }
         
         gameCharacter.draw();
+       gameMouse.draw();
         //GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 
 		
@@ -179,9 +170,9 @@ public class WorldController {
 		
 	}
 	
-	public void createItem(Item newItem){
+	public void createNPC(NPC newNPC){
 		
-		gameItems.add(newItem);
+		gameNPCs.add(newNPC);
 		
 	}
 	
@@ -206,12 +197,12 @@ public class WorldController {
 		  }
 		  gameProjectiles.clear();
 		  
-		  for(Item item: gameItems){
-	          item.deleteBody();
+		  for(NPC NPC: gameNPCs){
+	          NPC.deleteBody();
 
 		  }
 		  
-		  gameItems.clear();
+		  gameNPCs.clear();
 		  gameCharacter.deleteBody();
 		  
 		  gameLevel.load_level("gamedata/Level_"+level+".xml");

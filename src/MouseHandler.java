@@ -18,7 +18,6 @@ public class MouseHandler {
 	private float sensitivity = 0.5f;
 	private boolean has_bounds=true;
 	private Texture cursor;
-	boolean USING_CURSOR=false;
 	
 	public MouseHandler(){
 		
@@ -30,48 +29,15 @@ public class MouseHandler {
 	    }  
 		
 	    Mouse.setGrabbed(true);
-	    if(USING_CURSOR)
-	    	cursor = loadTexture("Cursor.png");
+	
 	    
 	}
 	
 	
-	Texture loadTexture(String newPath){
-		Texture newTexture = null;
-		try{
-			
-			newTexture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream(newPath),GL11.GL_NEAREST);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return newTexture;
-	}
 	
 	public void setVisibility(boolean newVisibility){
 		is_visible = newVisibility;
 	}
-	
-	
-	public void draw(){
-		
-	
-		if(is_visible){
-			cursor.bind();
-				
-			GL11.glBegin(GL11.GL_QUADS);
-			   	GL11.glTexCoord2f(0,0);
-			   	GL11.glVertex2f(mouse_x,mouse_y);
-				GL11.glTexCoord2f(1,0);
-				GL11.glVertex2f(mouse_x+cursor.getTextureWidth(),mouse_y);
-				GL11.glTexCoord2f(1,1);
-				GL11.glVertex2f(mouse_x+cursor.getTextureWidth(),mouse_y+cursor.getTextureHeight());
-				GL11.glTexCoord2f(0,1);
-				GL11.glVertex2f(mouse_x,mouse_y+cursor.getTextureHeight());	
-			GL11.glEnd();
-		}
-	}
-	
 	public int getWorldX(){
 		return (Mouse.getX()/20)-20;
 	}
@@ -79,11 +45,62 @@ public class MouseHandler {
 	public int getWorldY(){
 		return (Mouse.getY()/20)-15;
 	}
+	public int getScreenX(){
+		return Mouse.getX()-400;
+	}
+	public int getScreenY(){
+		return Mouse.getY()-300;
+	}
 	
+	
+	
+	
+	public void draw(){
+		
+	
+		if(is_visible){
+			drawRect(0f,getScreenX(),getScreenY(),10f,10f,1,0,0,1);
+		}
+	}
+	
+
+	public void drawRect(float angle,float x, float y, float width, float height, float newR,float newG, float newB, float newA){
+		
+		// draw quad
+		GL11.glLoadIdentity();
+		GL11.glPushMatrix();
+		GL11.glTranslatef(x, y, 0);
+		GL11.glTranslatef(400, 300, 0);
+		GL11.glRotatef((float)Math.toDegrees(angle), 0, 0, 1);
+		GL11.glTranslatef(-x, -y, 0);
+		GL11.glTranslatef(-400, -300, 0);
+		GL11.glTranslatef(400, 300, 0);
+
+		GL11.glBegin(GL11.GL_QUADS);
+					
+			GL11.glColor4f(0,0,0,0);
+			GL11.glVertex2f(x-(width/2),y-(height/2));
+			GL11.glVertex2f(x-(width/2)+width,y-(height/2));
+			GL11.glVertex2f(x-(width/2)+width,y+height-(height/2));
+			GL11.glVertex2f(x-(width/2),y+height-(height/2));
+				
+			GL11.glColor4f(newR,newG,newB,newA);
+			GL11.glVertex2f(x-(width/2)+1,y-(height/2)+1);
+			GL11.glVertex2f(x-(width/2)+width-1,y-(height/2)+1);
+			GL11.glVertex2f(x-(width/2)+width-1,y+height-(height/2)-1);
+			GL11.glVertex2f(x-(width/2)+1,y+height-(height/2)-1);
+	            	
+		GL11.glEnd();
+	            
+	            
+	    GL11.glPopMatrix();
+		}
+	
+
 	//public int get
 	
 	public boolean getLeftMouseDown(){
-		return left_mouse_down;
+		return Mouse.isButtonDown(0);
 	}
 	
 	public void toggleBounds(){
@@ -105,9 +122,5 @@ public class MouseHandler {
 		return right_mouse_down;
 	}
 	
-	public void setCursor(String newCursorPath){
-		
-		cursor = loadTexture(newCursorPath);
-	}
-	
+
 }

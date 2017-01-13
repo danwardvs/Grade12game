@@ -14,6 +14,7 @@ public class Level {
 	World gameWorld;
 	WorldController gameController;
 	Character gameCharacter;
+	MouseHandler gameMouse;
 	String object_type;
 	float x;
 	float y;
@@ -31,8 +32,9 @@ public class Level {
 	
 	
 	
-	public Level(WorldController newWorldController, World newWorld, Character newCharacter){
+	public Level(WorldController newWorldController, World newWorld, MouseHandler newMouse, Character newCharacter){
 		gameWorld = newWorld;
+		gameMouse = newMouse;
 		gameController = newWorldController;
 		gameCharacter = newCharacter;
 	}
@@ -92,20 +94,20 @@ public class Level {
 					}
 					if(object_type.equals("Character")){
 						if(body_type.equals("KINEMATIC")){
-							gameCharacter = new Character(gameController,gameWorld,false,x,y,width,height,angle,r,g,b,1);
+							gameCharacter = new Character(gameController,gameWorld,gameMouse,false,x,y,width,height,angle,r,g,b,1);
 							gameController.createCharacter(gameCharacter);
 						}
 						if(body_type.equals("DYNAMIC")){
-							gameCharacter = new Character(gameController,gameWorld,false,x,y,width,height,angle,r,g,b,1);
+							gameCharacter = new Character(gameController,gameWorld,gameMouse,false,x,y,width,height,angle,r,g,b,1);
 							gameController.createCharacter(gameCharacter);
 						}
 					}
-					if(object_type.equals("Item")){
+					if(object_type.equals("NPC")){
 						if(body_type.equals("KINEMATIC")){
-							gameController.createItem(new Item(gameWorld,gameCharacter,gameController,itemtype,direction,BodyType.KINEMATIC,true,x,y,width,height,angle,r,g,b,1));
+							gameController.createNPC(new NPC(gameWorld,gameCharacter,gameController,itemtype,direction,BodyType.KINEMATIC,true,x,y,width,height,angle,r,g,b,1));
 						}
 						if(body_type.equals("DYNAMIC")){
-							gameController.createItem(new Item(gameWorld,gameCharacter,gameController,itemtype,direction,BodyType.DYNAMIC,false,x,y,width,height,angle,r,g,b,1));
+							gameController.createNPC(new NPC(gameWorld,gameCharacter,gameController,itemtype,direction,BodyType.DYNAMIC,false,x,y,width,height,angle,r,g,b,1));
 						}
 					}
 

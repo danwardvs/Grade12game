@@ -2,14 +2,14 @@
 <level>
 	<object type="Character">
 		<x>-10</x>
-		<y>-13</y>
+		<y>-9</y>
 		<width>0.5</width>
 		<height>1</height>
 		<angle>0</angle>
 		<r>1</r>
 		<g>1</g>
 		<b>0</b>
-		<bodytype>KINEMATIC</bodytype>
+		<bodytype>DYNAMIC</bodytype>
 	</object>
 	
 

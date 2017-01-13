@@ -35,6 +35,8 @@ public class NPC extends Box {
 	Box Neck;
 	Box Head;
 	
+	
+	
 	public NPC(World newWorld, Character newCharacter, WorldController newWorldController, String newType, Boolean newDirection, BodyType newBodyType, boolean newIsSensor, float newX, float newY, float newWidth,
 			float newHeight, float newAngle, float newR, float newG, float newB, float newA) {
 		super(newWorld, newBodyType, newIsSensor, newX, newY, newWidth, newHeight, newAngle, newR, newG, newB, newA);
@@ -45,10 +47,6 @@ public class NPC extends Box {
 		gameController = newWorldController;
 		direction=newDirection;
 		
-		//Box LeftFoot = new Box(gameWorld,BodyType.DYNAMIC,false,newX-0.25f,newY-1f,0.2f,0.5f,0,0,1,0,1);	
-		
-
-		//Vec2 RightFootAnchor = new Vec2(newX+0.25f,newY-0.5f);
 		
 		LeftThigh = createBodyPart(body,newX-0.25f,newY-1f,0.2f,0.5f,newX-0.25f,newY-0.5f,-0.2f,0);
 		LeftShin = createBodyPart(LeftThigh.getBody(),newX-0.25f,newY-2f,0.2f,0.5f,newX-0.25f,newY-1.5f,-0.2f,0);
@@ -138,7 +136,7 @@ public class NPC extends Box {
 	}
 	
 	public int update(){
-	
+		
 		
 		itemContactList = body.getContactList();
 		
@@ -151,7 +149,7 @@ public class NPC extends Box {
 			     }
 			}
 			
-			itemContactList = body.getContactList();
+			//itemContactList = body.getContactList();
 			
 			
 			for (ContactEdge ce = body.getContactList(); ce != null; ce = ce.next){

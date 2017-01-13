@@ -43,6 +43,7 @@ public class WorldController {
     
     public WorldController(World newWorld){
     	gameWorld = newWorld;
+  
     }
 	
     public void start() {

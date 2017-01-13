@@ -50,7 +50,7 @@ public class Character extends Box {
 	Box Neck;
 	Box Head;
 	
-	RevoluteJoint RightShoulder;
+	RevoluteJoint RightShoulder;;
 	
 	
 	Random rn = new Random();

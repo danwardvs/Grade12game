@@ -15,8 +15,8 @@ public class NPC extends Box {
 	int shootTimer;
 	boolean alive=true;
 	boolean direction=false;
-	Box LeftFoot;
-	Box RightFoot;
+	//Box LeftFoot;
+	//Box RightFoot;
 
 	
 	public NPC(World newWorld, Character newCharacter, WorldController newWorldController, String newType, Boolean newDirection, BodyType newBodyType, boolean newIsSensor, float newX, float newY, float newWidth,
@@ -29,24 +29,32 @@ public class NPC extends Box {
 		gameController = newWorldController;
 		direction=newDirection;
 		
-		LeftFoot = new Box(gameWorld,BodyType.DYNAMIC,false,newX-0.25f,newY-newHeight,0.2f,0.5f,0,0,1,0,1);	
+		Box LeftFoot = new Box(gameWorld,BodyType.DYNAMIC,false,newX-0.25f,newY-1f,0.2f,0.5f,0,0,1,0,1);	
 		
 		Vec2 LeftFootAnchor = new Vec2(newX-0.25f,newY-0.5f);
 		gameController.createBox(LeftFoot);
 		
 		RevoluteJointDef jointDef = new RevoluteJointDef();
+		
+		
 		jointDef.initialize(body, LeftFoot.body, LeftFootAnchor);
         jointDef.collideConnected = false;
         gameWorld.createJoint(jointDef);
         
-        RightFoot = new Box(gameWorld,BodyType.DYNAMIC,false,newX+0.25f,newY-newHeight,0.2f,0.5f,0,0,1,0,1);	
+        Box RightFoot = new Box(gameWorld,BodyType.DYNAMIC,false,newX+0.25f,newY-1f,0.2f,0.5f,0,0,1,0,1);	
 		
 		Vec2 RightFootAnchor = new Vec2(newX+0.25f,newY-0.5f);
 		gameController.createBox(RightFoot);
 		
 		jointDef.initialize(body, RightFoot.body, RightFootAnchor);
         jointDef.collideConnected = false;
+       
+        
         gameWorld.createJoint(jointDef);
+		
+	}
+	public void createBodyPart(int newX, int newY,int newHeight, int newWidth, float newAnchorX, float newAnchorY){
+		
 		
 	}
 	

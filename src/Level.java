@@ -103,12 +103,10 @@ public class Level {
 						}
 					}
 					if(object_type.equals("NPC")){
-						if(body_type.equals("KINEMATIC")){
-							gameController.createNPC(new NPC(gameWorld,gameCharacter,gameController,itemtype,direction,BodyType.KINEMATIC,true,x,y,width,height,angle,r,g,b,1));
-						}
-						if(body_type.equals("DYNAMIC")){
-							gameController.createNPC(new NPC(gameWorld,gameCharacter,gameController,itemtype,direction,BodyType.DYNAMIC,false,x,y,width,height,angle,r,g,b,1));
-						}
+					
+					
+						gameController.createNPC(new NPC(gameWorld,gameCharacter,gameController,itemtype,direction,BodyType.DYNAMIC,false,x,y,0.5f,0.7f,angle,r,g,b,1));
+						
 					}
 
 				}

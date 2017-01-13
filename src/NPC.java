@@ -1,4 +1,5 @@
 import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.contacts.ContactEdge;
@@ -15,10 +16,14 @@ public class NPC extends Box {
 	int shootTimer;
 	boolean alive=true;
 	boolean direction=false;
-	//Box LeftFoot;
-	//Box RightFoot;
-
+	Box LeftThigh;
+	Box LeftShin;
+	Box LeftFoot;
 	
+	Box RightThigh;
+	Box RightShin;
+	Box RightFoot;
+
 	public NPC(World newWorld, Character newCharacter, WorldController newWorldController, String newType, Boolean newDirection, BodyType newBodyType, boolean newIsSensor, float newX, float newY, float newWidth,
 			float newHeight, float newAngle, float newR, float newG, float newB, float newA) {
 		super(newWorld, newBodyType, newIsSensor, newX, newY, newWidth, newHeight, newAngle, newR, newG, newB, newA);
@@ -29,32 +34,47 @@ public class NPC extends Box {
 		gameController = newWorldController;
 		direction=newDirection;
 		
-		Box LeftFoot = new Box(gameWorld,BodyType.DYNAMIC,false,newX-0.25f,newY-1f,0.2f,0.5f,0,0,1,0,1);	
+		//Box LeftFoot = new Box(gameWorld,BodyType.DYNAMIC,false,newX-0.25f,newY-1f,0.2f,0.5f,0,0,1,0,1);	
 		
-		Vec2 LeftFootAnchor = new Vec2(newX-0.25f,newY-0.5f);
-		gameController.createBox(LeftFoot);
+
+		//Vec2 RightFootAnchor = new Vec2(newX+0.25f,newY-0.5f);
 		
-		RevoluteJointDef jointDef = new RevoluteJointDef();
+		LeftThigh = createBodyPart(body,newX-0.25f,newY-1f,0.2f,0.5f,newX-0.25f,newY-0.5f,-0.2f,0);
+		LeftShin = createBodyPart(LeftThigh.getBody(),newX-0.25f,newY-2f,0.2f,0.5f,newX-0.25f,newY-1.5f,-0.2f,0);
+		LeftFoot = createBodyPart(LeftShin.getBody(),newX-0.5f,newY-2.5f,0.5f,0.2f,newX-0.25f,newY-2.5f,-0.2f,0);
+
+		RightThigh = createBodyPart(body,newX+0.25f,newY-1f,0.2f,0.5f,newX+0.25f,newY-0.5f,0,0.2f);
+		RightShin = createBodyPart(RightThigh.getBody(),newX+0.25f,newY-2f,0.2f,0.5f,newX+0.25f,newY-1.5f,0,0.2f);
+		RightFoot = createBodyPart(RightShin.getBody(),newX+0.5f,newY-2.5f,0.5f,0.2f,newX+0.25f,newY-2.5f,0,0.2f);
 		
 		
-		jointDef.initialize(body, LeftFoot.body, LeftFootAnchor);
-        jointDef.collideConnected = false;
-        gameWorld.createJoint(jointDef);
-        
-        Box RightFoot = new Box(gameWorld,BodyType.DYNAMIC,false,newX+0.25f,newY-1f,0.2f,0.5f,0,0,1,0,1);	
-		
-		Vec2 RightFootAnchor = new Vec2(newX+0.25f,newY-0.5f);
-		gameController.createBox(RightFoot);
-		
-		jointDef.initialize(body, RightFoot.body, RightFootAnchor);
-        jointDef.collideConnected = false;
        
         
-        gameWorld.createJoint(jointDef);
 		
 	}
-	public void createBodyPart(int newX, int newY,int newHeight, int newWidth, float newAnchorX, float newAnchorY){
+	public Box createBodyPart(Body newBody,float newX, float newY,float newWidth, float newHeight, float newAnchorX, float newAnchorY, float newLowerLimit, float newUpperLimit){
 		
+		Box newBox = new Box(gameWorld,BodyType.DYNAMIC,false,newX,newY,newWidth,newHeight,0,0,1,0,1);
+		//newBox.body.setAngularDamping(1000000000);
+		//newBox.body.setLinearDamping(10);
+		gameController.createBox(newBox);
+		
+		Vec2 Anchor = new Vec2(newAnchorX,newAnchorY);
+		
+		RevoluteJointDef jointDef = new RevoluteJointDef();
+		jointDef.initialize(newBody, newBox.body, Anchor);
+        jointDef.collideConnected = false;
+        jointDef.enableLimit=true;
+        jointDef.upperAngle=newUpperLimit;
+        jointDef.lowerAngle=newLowerLimit;
+        jointDef.referenceAngle=0;
+    
+        
+        gameWorld.createJoint(jointDef);
+
+        
+
+		return newBox;	
 		
 	}
 	
@@ -68,9 +88,22 @@ public class NPC extends Box {
 	}
 	
 	public int update(){
+	
+		
 		itemContactList = body.getContactList();
 		
 		
+			for (ContactEdge ce = body.getContactList(); ce != null; ce = ce.next){
+			     if (ce.other == gameCharacter.body && ce.contact.isTouching()){
+			    	 
+	
+			    
+			     }
+			}
+			
+			itemContactList = body.getContactList();
+			
+			
 			for (ContactEdge ce = body.getContactList(); ce != null; ce = ce.next){
 			     if (ce.other == gameCharacter.body && ce.contact.isTouching()){
 			    	 

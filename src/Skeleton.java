@@ -7,6 +7,7 @@ import org.jbox2d.dynamics.FixtureDef;
 import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.joints.RevoluteJoint;
 import org.jbox2d.dynamics.joints.RevoluteJointDef;
+import org.lwjgl.input.Keyboard;
 
 public class Skeleton {
 	
@@ -126,6 +127,7 @@ public class Skeleton {
         jd.referenceAngle=0;
    
         newJoint.setJoint((RevoluteJoint) gameWorld.createJoint(jd));
+        System.out.println(newJoint);
     
 		return newBox;	
 		
@@ -149,6 +151,18 @@ public class Skeleton {
 	
 	
 	public void draw(){
+		 if(Keyboard.isKeyDown(Keyboard.KEY_Q)){
+				System.out.println(RightShoulder);
+				System.out.println(RightShoulder.getJoint());
+				RightShoulder.getJoint().enableMotor(true);
+				 RightShoulder.getJoint().setMotorSpeed(100);
+					
+					
+				
+			 }
+		
+		//RightShoulder.getJoint().enableMotor(true);
+		//RightShoulder.getJoint().setMotorSpeed(-1000);
 		Core.draw();
 		
 		LeftThigh.draw();

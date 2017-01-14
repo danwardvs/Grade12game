@@ -138,7 +138,6 @@ public class Character extends Skeleton {
 			 key_delay+=delta;
 			 if(key_delay<0)
 				 key_delay=0;
-			 System.out.println(key_delay);
 			 
 			 if(gameMouse.getLeftMouseDown() && key_delay>100){
 				 gameController.createSkeleton(new Skeleton(gameWorld,gameController,gameMouse.getWorldX(),gameMouse.getWorldY(),0.5f,0.5f,0.5f));
@@ -166,14 +165,7 @@ public class Character extends Skeleton {
 				 gameWorld.setGravity(new Vec2(gameWorld.getGravity().x,gameWorld.getGravity().y-0.5f));
 
 			 }
-			 if(Keyboard.isKeyDown(Keyboard.KEY_Q)){
-				System.out.println(RightShoulder);
-				RightShoulder.getJoint().enableMotor(true);
-				 RightShoulder.getJoint().setMotorSpeed(-10);
-					
-					
-				
-			 }
+			
 			 if(Keyboard.isKeyDown(Keyboard.KEY_E)){
 					System.out.println(RightShoulder);
 					 RightShoulder.getJoint().enableMotor(false);

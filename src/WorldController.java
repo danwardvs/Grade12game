@@ -30,6 +30,7 @@ public class WorldController {
 	List<Box> gameBoxes = new ArrayList<Box>();
 	List<Projectile> gameProjectiles = new ArrayList<Projectile>();
 	List<NPC> gameNPCs = new ArrayList<NPC>();
+	List<Skeleton> gameSkeletons = new ArrayList<Skeleton>();
 	Character gameCharacter;
 	static World gameWorld;
 	Level gameLevel;
@@ -149,6 +150,11 @@ public class WorldController {
         for(Box NPC: gameNPCs){
         	NPC.draw();
         }
+        for(Skeleton skeleton: gameSkeletons){
+        	skeleton.draw();
+        }
+        
+        
         
         gameCharacter.draw();
        gameMouse.draw();
@@ -161,6 +167,12 @@ public class WorldController {
 		gameBoxes.add(newBox);
 	
 	} 
+	 
+	 public void createSkeleton(Skeleton newSkeleton){
+			
+			gameSkeletons.add(newSkeleton);
+		
+		} 
 	public int getRemainingBoxes(){
 		return score;
 	}

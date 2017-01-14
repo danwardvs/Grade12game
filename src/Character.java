@@ -50,7 +50,25 @@ public class Character extends Box {
 	Box Neck;
 	Box Head;
 	
-	RevoluteJoint RightShoulder;
+	Joint LeftHip = new Joint();
+	Joint LeftKnee = new Joint();
+	Joint LeftAnkle = new Joint();
+	
+	Joint RightHip = new Joint();
+	Joint RightKnee = new Joint();
+	Joint RightAnkle = new Joint();
+	
+	Joint RightShoulder = new Joint();
+	Joint RightElbow = new Joint();
+	Joint RightWrist = new Joint();
+	
+	Joint LeftShoulder = new Joint();
+	Joint LeftElbow = new Joint();
+	Joint LeftWrist = new Joint();
+	
+	Joint LowerNeck = new Joint();
+	Joint UpperNeck = new Joint();
+	
 	
 	
 	Random rn = new Random();
@@ -64,31 +82,30 @@ public class Character extends Box {
 		gameController = newWorldController;
 		//body.setFixedRotation(true);
 		
-		LeftThigh = createBodyPart(body,newX-0.25f,newY-1f,0.2f,0.5f,newX-0.25f,newY-0.5f,true,-0.2f,0);
-		LeftShin = createBodyPart(LeftThigh.getBody(),newX-0.25f,newY-2f,0.2f,0.5f,newX-0.25f,newY-1.5f,true,-0.2f,0);
-		LeftFoot = createBodyPart(LeftShin.getBody(),newX-0.5f,newY-2.5f,0.75f,0.2f,newX-0.25f,newY-2.5f,true,-0.2f,0);
+		LeftThigh = createBodyPart(LeftHip,body,newX-0.25f,newY-1f,0.2f,0.5f,newX-0.25f,newY-0.5f,true,-0.2f,0);
+		LeftShin = createBodyPart(LeftKnee,LeftThigh.getBody(),newX-0.25f,newY-2f,0.2f,0.5f,newX-0.25f,newY-1.5f,true,-0.2f,0);
+		LeftFoot = createBodyPart(LeftAnkle,LeftShin.getBody(),newX-0.5f,newY-2.5f,0.75f,0.2f,newX-0.25f,newY-2.5f,true,-0.2f,0);
 
-		RightThigh = createBodyPart(body,newX+0.25f,newY-1f,0.2f,0.5f,newX+0.25f,newY-0.5f,true,0,0.2f);
-		RightShin = createBodyPart(RightThigh.getBody(),newX+0.25f,newY-2f,0.2f,0.5f,newX+0.25f,newY-1.5f,true,0,0.2f);
-		RightFoot = createBodyPart(RightShin.getBody(),newX+0.5f,newY-2.5f,0.75f,0.2f,newX+0.25f,newY-2.5f,true,0,0.2f);
+		RightThigh = createBodyPart(RightHip,body,newX+0.25f,newY-1f,0.2f,0.5f,newX+0.25f,newY-0.5f,true,0,0.2f);
+		RightShin = createBodyPart(RightKnee,RightThigh.getBody(),newX+0.25f,newY-2f,0.2f,0.5f,newX+0.25f,newY-1.5f,true,0,0.2f);
+		RightFoot = createBodyPart(RightAnkle,RightShin.getBody(),newX+0.5f,newY-2.5f,0.75f,0.2f,newX+0.25f,newY-2.5f,true,0,0.2f);
 		
 		RightUpperArm = createBodyPart(RightShoulder,body,newX-0.75f,newY,0.2f,0.5f,newX-0.75f,newY+0.25f,false,-3.0f,2.0f);
-		System.out.println(RightShoulder);
-		RightForearm = createBodyPart(RightUpperArm.getBody(),newX-0.75f,newY-0.5f,0.2f,0.5f,newX-0.75f,newY-0.25f,false,0,0);
-		RightHand = createBodyPart(RightForearm.getBody(),newX-0.75f,newY-1f,0.3f,0.3f,newX-0.75f,newY-0.75f,false,0,0);
+		RightForearm = createBodyPart(RightElbow,RightUpperArm.getBody(),newX-0.75f,newY-0.5f,0.2f,0.5f,newX-0.75f,newY-0.25f,false,0,0);
+		RightHand = createBodyPart(RightWrist,RightForearm.getBody(),newX-0.75f,newY-1f,0.3f,0.3f,newX-0.75f,newY-0.75f,false,0,0);
 		
-		LeftUpperArm = createBodyPart(body,newX+0.75f,newY,0.2f,0.5f,newX+0.75f,newY+0.25f,false,0,0);
-		LeftForearm = createBodyPart(LeftUpperArm.getBody(),newX+0.75f,newY-1f,0.2f,0.5f,newX+0.75f,newY-0.25f,false,0,0);
-		LeftHand = createBodyPart(LeftForearm.getBody(),newX+0.75f,newY-1.5f,0.3f,0.3f,newX+0.75f,newY-1.25f,false,0,0);
+		LeftUpperArm = createBodyPart(LeftShoulder,body,newX+0.75f,newY,0.2f,0.5f,newX+0.75f,newY+0.25f,false,0,0);
+		LeftForearm = createBodyPart(LeftElbow,LeftUpperArm.getBody(),newX+0.75f,newY-1f,0.2f,0.5f,newX+0.75f,newY-0.25f,false,0,0);
+		LeftHand = createBodyPart(LeftWrist,LeftForearm.getBody(),newX+0.75f,newY-1.5f,0.3f,0.3f,newX+0.75f,newY-1.25f,false,0,0);
 		
-		Neck = createBodyPart(body,newX,newY+0.75f,0.3f,0.2f,newX,newY+0.75f,true,0,0);
+		Neck = createBodyPart(LowerNeck,body,newX,newY+0.75f,0.3f,0.2f,newX,newY+0.75f,true,0,0);
 		
-		Head = createBodyPart(Neck.body,newX,newY+1.25f,0.4f,0.4f,newX,newY+1.25f,true,0,0);
+		Head = createBodyPart(UpperNeck,Neck.body,newX,newY+1.25f,0.4f,0.4f,newX,newY+1.25f,true,0,0);
        
 	}
 	
 	//This function creates a body part based on a revolutejoint that is passed
-	public Box createBodyPart(RevoluteJoint newJoint, Body newBody,float newX, float newY,float newWidth, float newHeight, float newAnchorX, float newAnchorY,boolean newLimits, float newLowerLimit, float newUpperLimit){
+	public Box createBodyPart(Joint newJoint, Body newBody,float newX, float newY,float newWidth, float newHeight, float newAnchorX, float newAnchorY,boolean newLimits, float newLowerLimit, float newUpperLimit){
 		
 		Box newBox = new Box(gameWorld,BodyType.DYNAMIC,false,newX,newY,newWidth,newHeight,0,0,1,0,1);
 		//newBox.body.setAngularDamping(1000000000);
@@ -100,18 +117,17 @@ public class Character extends Box {
 		RevoluteJointDef jd = new RevoluteJointDef();
 		jd.initialize(newBody, newBox.body, Anchor);
 		jd.enableMotor=true;
-		jd.maxMotorTorque=100000;
+		jd.maxMotorTorque=0;
 		jd.motorSpeed=0;
         jd.collideConnected = false;
         jd.enableLimit=newLimits;
         jd.upperAngle=newUpperLimit;
         jd.lowerAngle=newLowerLimit;
-        jd.referenceAngle=-1;
+        jd.referenceAngle=0;
    
-        System.out.println(newJoint);
-        RevoluteJoint newJoint2 = (RevoluteJoint) gameWorld.createJoint(jd);
-        newJoint = newJoint2;
-        System.out.println(newJoint);
+
+        newJoint.setJoint((RevoluteJoint) gameWorld.createJoint(jd));
+    
 
         
 
@@ -120,31 +136,7 @@ public class Character extends Box {
 	}
 
 	
-	public Box createBodyPart(Body newBody,float newX, float newY,float newWidth, float newHeight, float newAnchorX, float newAnchorY,boolean newLimits, float newLowerLimit, float newUpperLimit){
-		
-		Box newBox = new Box(gameWorld,BodyType.DYNAMIC,false,newX,newY,newWidth,newHeight,0,0,1,0,1);
-		//newBox.body.setAngularDamping(1000000000);
-		//newBox.body.setLinearDamping(10);
-		gameController.createBox(newBox);
-		
-		Vec2 Anchor = new Vec2(newAnchorX,newAnchorY);
-		
-		RevoluteJointDef jointDef = new RevoluteJointDef();
-		jointDef.initialize(newBody, newBox.body, Anchor);
-        jointDef.collideConnected = false;
-        jointDef.enableLimit=newLimits;
-        jointDef.upperAngle=newUpperLimit;
-        jointDef.lowerAngle=newLowerLimit;
-        jointDef.referenceAngle=0;
-    
-        
-        gameWorld.createJoint(jointDef);
-
-        
-
-		return newBox;	
-		
-	}
+	
 	
 	
 	public void createProjectile(float newSpeed, float newAngle, float newX, float newY){
@@ -202,7 +194,7 @@ public class Character extends Box {
 			 bullet_time+=delta;
 			 
 			 if(gameMouse.getLeftMouseDown())
-				 gameController.createBox(new Box(gameWorld,BodyType.DYNAMIC,false,Mouse.getX()/20-20,Mouse.getY()/20-15,0.5f,0.5f,0,r,g,b,1));
+				 gameController.createSkeleton(new Skeleton(gameWorld,gameController,gameMouse.getWorldX(),gameMouse.getWorldY(),0.5f,0.5f,0.5f));
 
 			 
 			 if (Keyboard.isKeyDown(Keyboard.KEY_W)){
@@ -228,14 +220,16 @@ public class Character extends Box {
 			 }
 			 if(Keyboard.isKeyDown(Keyboard.KEY_Q)){
 				System.out.println(RightShoulder);
-				 RightShoulder.setMotorSpeed(10);
+				RightShoulder.getJoint().enableMotor(true);
+				 RightShoulder.getJoint().setMotorSpeed(-10);
 					
 					
 				
 			 }
 			 if(Keyboard.isKeyDown(Keyboard.KEY_E)){
 					System.out.println(RightShoulder);
-					 RightShoulder.setMotorSpeed(-10);
+					 RightShoulder.getJoint().enableMotor(false);
+					 //gameWorld.destroyJoint(RightShoulder);
 						
 						
 					

@@ -50,7 +50,7 @@ public class Character extends Box {
 	Box Neck;
 	Box Head;
 	
-	RevoluteJoint RightShoulder;;
+	RevoluteJoint RightShoulder;
 	
 	
 	Random rn = new Random();
@@ -62,7 +62,7 @@ public class Character extends Box {
 		gameWorld = newWorld;
 		gameMouse = newMouse;
 		gameController = newWorldController;
-		body.setFixedRotation(true);
+		//body.setFixedRotation(true);
 		
 		LeftThigh = createBodyPart(body,newX-0.25f,newY-1f,0.2f,0.5f,newX-0.25f,newY-0.5f,-0.2f,0);
 		LeftShin = createBodyPart(LeftThigh.getBody(),newX-0.25f,newY-2f,0.2f,0.5f,newX-0.25f,newY-1.5f,-0.2f,0);
@@ -99,7 +99,7 @@ public class Character extends Box {
 		jd.initialize(newBody, newBox.body, Anchor);
 		jd.enableMotor=true;
 		jd.maxMotorTorque=100000;
-		jd.motorSpeed=-10;
+		jd.motorSpeed=0;
         jd.collideConnected = false;
         jd.enableLimit=true;
         jd.upperAngle=newUpperLimit;
@@ -107,7 +107,8 @@ public class Character extends Box {
         jd.referenceAngle=-1;
    
         System.out.println(newJoint);
-        newJoint = (RevoluteJoint) gameWorld.createJoint(jd);
+        RevoluteJoint newJoint2 = (RevoluteJoint) gameWorld.createJoint(jd);
+        newJoint = newJoint2;
         System.out.println(newJoint);
 
         
@@ -240,9 +241,9 @@ public class Character extends Box {
 		if(body.getLinearVelocity().y<-15){
 			
 			
-			body.setFixedRotation(false);
-			body.applyTorque(50);
-			alive=false;
+			//body.setFixedRotation(false);
+			//body.applyTorque(50);
+			//alive=false;
 			
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_R)){
@@ -280,11 +281,32 @@ public class Character extends Box {
 			 }
 			 if(Keyboard.isKeyDown(Keyboard.KEY_Q)){
 				System.out.println(RightShoulder);
-				 //RightShoulder.setMotorSpeed(100);
+				 RightShoulder.setMotorSpeed(10);
 					
 					
 				
 			 }
+			 if(Keyboard.isKeyDown(Keyboard.KEY_E)){
+					System.out.println(RightShoulder);
+					 RightShoulder.setMotorSpeed(-10);
+						
+						
+					
+				 }
+			 
+			 if(Keyboard.isKeyDown(Keyboard.KEY_G)){
+					body.applyAngularImpulse(1);
+						
+						
+					
+				 }
+				 if(Keyboard.isKeyDown(Keyboard.KEY_F)){
+					 body.applyAngularImpulse(-1f);
+							
+							
+						
+					 }
+				 
 			 
 			 
 			 
@@ -299,7 +321,7 @@ public class Character extends Box {
 			 //System.out.println(Feet);
 			 if (Keyboard.isKeyDown(Keyboard.KEY_UP)){
 				 if(body.getLinearVelocity().y<=0.1f && body.getLinearVelocity().y>=-0.1f)
-					applyImpulse(0,2000);
+					applyImpulse(0,6000);
 			 }
 			 
 			 

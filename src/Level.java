@@ -95,7 +95,7 @@ public class Level {
 					if(object_type.equals("Character")){
 			
 						if(body_type.equals("DYNAMIC")){
-							gameCharacter = new Character(gameController,gameWorld,gameMouse,false,x,y,0.5f,0.7f,angle,r,g,b,1);
+							gameCharacter = new Character(gameWorld,gameController,gameMouse,x,y,r,g,b);
 							gameController.createCharacter(gameCharacter);
 						}
 					}

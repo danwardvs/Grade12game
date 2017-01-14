@@ -142,22 +142,22 @@ public class NPC extends Box {
 		
 		
 			for (ContactEdge ce = body.getContactList(); ce != null; ce = ce.next){
-			     if (ce.other == gameCharacter.body && ce.contact.isTouching()){
+			     //if (ce.other == gameCharacter.body && ce.contact.isTouching()){
 			    	 
 	
 			    
-			     }
+			   //  }
 			}
 			
 			//itemContactList = body.getContactList();
 			
 			
 			for (ContactEdge ce = body.getContactList(); ce != null; ce = ce.next){
-			     if (ce.other == gameCharacter.body && ce.contact.isTouching()){
+			  //   if (ce.other == gameCharacter.body && ce.contact.isTouching()){
 			    	 
 	
 			    
-			     }
+			   //  }
 			}
 		
 		

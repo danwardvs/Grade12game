@@ -15,16 +15,17 @@ import java.util.Random;
 
 
 
-public class Character extends Box {
+public class Character extends Skeleton {
 	
 	float movement_speed=50;
-	World gameWorld;
-	WorldController gameController;
+	//World gameWorld;
+	//WorldController gameController;
 	MouseHandler gameMouse;
 	int bullet_time;
 	int bullet_time_delay=300;
 	float x;
 	float y;
+	int key_delay;
 	boolean hasDied = false;
 	boolean direction;
 
@@ -73,69 +74,17 @@ public class Character extends Box {
 	
 	Random rn = new Random();
 
-	public Character(WorldController newWorldController, World newWorld, MouseHandler newMouse, boolean newIsSensor, float newX, float newY, float newWidth, float newHeight,
+	public Character(World newWorld,WorldController newWorldController, MouseHandler newMouse, float newX, float newY,float newR,float newG,float newB){
 		
-		float newAngle, float newR, float newG, float newB, float newA) {
-		super(newWorld, BodyType.DYNAMIC, newIsSensor, newX, newY, newWidth, newHeight, newAngle, newR, newG, newB, newA);
-		gameWorld = newWorld;
+		super(newWorld,newWorldController,newX, newY,newR,newG,newB);
+		//gameWorld = newWorld;
 		gameMouse = newMouse;
-		gameController = newWorldController;
-		//body.setFixedRotation(true);
+		//gameController = newWorldController;
+		//Core.getBody().setFixedRotation(true);
 		
-		LeftThigh = createBodyPart(LeftHip,body,newX-0.25f,newY-1f,0.2f,0.5f,newX-0.25f,newY-0.5f,true,-0.2f,0);
-		LeftShin = createBodyPart(LeftKnee,LeftThigh.getBody(),newX-0.25f,newY-2f,0.2f,0.5f,newX-0.25f,newY-1.5f,true,-0.2f,0);
-		LeftFoot = createBodyPart(LeftAnkle,LeftShin.getBody(),newX-0.5f,newY-2.5f,0.75f,0.2f,newX-0.25f,newY-2.5f,true,-0.2f,0);
-
-		RightThigh = createBodyPart(RightHip,body,newX+0.25f,newY-1f,0.2f,0.5f,newX+0.25f,newY-0.5f,true,0,0.2f);
-		RightShin = createBodyPart(RightKnee,RightThigh.getBody(),newX+0.25f,newY-2f,0.2f,0.5f,newX+0.25f,newY-1.5f,true,0,0.2f);
-		RightFoot = createBodyPart(RightAnkle,RightShin.getBody(),newX+0.5f,newY-2.5f,0.75f,0.2f,newX+0.25f,newY-2.5f,true,0,0.2f);
 		
-		RightUpperArm = createBodyPart(RightShoulder,body,newX-0.75f,newY,0.2f,0.5f,newX-0.75f,newY+0.25f,false,-3.0f,2.0f);
-		RightForearm = createBodyPart(RightElbow,RightUpperArm.getBody(),newX-0.75f,newY-0.5f,0.2f,0.5f,newX-0.75f,newY-0.25f,false,0,0);
-		RightHand = createBodyPart(RightWrist,RightForearm.getBody(),newX-0.75f,newY-1f,0.3f,0.3f,newX-0.75f,newY-0.75f,false,0,0);
-		
-		LeftUpperArm = createBodyPart(LeftShoulder,body,newX+0.75f,newY,0.2f,0.5f,newX+0.75f,newY+0.25f,false,0,0);
-		LeftForearm = createBodyPart(LeftElbow,LeftUpperArm.getBody(),newX+0.75f,newY-1f,0.2f,0.5f,newX+0.75f,newY-0.25f,false,0,0);
-		LeftHand = createBodyPart(LeftWrist,LeftForearm.getBody(),newX+0.75f,newY-1.5f,0.3f,0.3f,newX+0.75f,newY-1.25f,false,0,0);
-		
-		Neck = createBodyPart(LowerNeck,body,newX,newY+0.75f,0.3f,0.2f,newX,newY+0.75f,true,0,0);
-		
-		Head = createBodyPart(UpperNeck,Neck.body,newX,newY+1.25f,0.4f,0.4f,newX,newY+1.25f,true,0,0);
        
 	}
-	
-	//This function creates a body part based on a revolutejoint that is passed
-	public Box createBodyPart(Joint newJoint, Body newBody,float newX, float newY,float newWidth, float newHeight, float newAnchorX, float newAnchorY,boolean newLimits, float newLowerLimit, float newUpperLimit){
-		
-		Box newBox = new Box(gameWorld,BodyType.DYNAMIC,false,newX,newY,newWidth,newHeight,0,0,1,0,1);
-		//newBox.body.setAngularDamping(1000000000);
-		//newBox.body.setLinearDamping(10);
-		gameController.createBox(newBox);
-		
-		Vec2 Anchor = new Vec2(newAnchorX,newAnchorY);
-		
-		RevoluteJointDef jd = new RevoluteJointDef();
-		jd.initialize(newBody, newBox.body, Anchor);
-		jd.enableMotor=true;
-		jd.maxMotorTorque=0;
-		jd.motorSpeed=0;
-        jd.collideConnected = false;
-        jd.enableLimit=newLimits;
-        jd.upperAngle=newUpperLimit;
-        jd.lowerAngle=newLowerLimit;
-        jd.referenceAngle=0;
-   
-
-        newJoint.setJoint((RevoluteJoint) gameWorld.createJoint(jd));
-    
-
-        
-
-		return newBox;	
-		
-	}
-
-	
 	
 	
 	
@@ -148,19 +97,14 @@ public class Character extends Box {
 	public void setState(boolean newAlive){
 		alive = newAlive;
 	}
-	public void draw(){
-        Vec2 position = body.getPosition();
-        float angle = body.getAngle();
-        drawRect(angle,position.x*20,position.y*20,width*40,height*40,r,g,b,a);
-       
-	}
+
 	
 	public void update(int delta){
 		
 		//System.out.println(RightShoulder.bodyA);
 		
-		float x = body.getPosition().x;
-		float y = body.getPosition().y;
+		float x = Core.getBody().getPosition().x;
+		float y = Core.getBody().getPosition().y;
 		
 		if(x<-22){
 			alive=false;
@@ -177,11 +121,11 @@ public class Character extends Box {
 			b=0;
 		}
 		
-		if(body.getLinearVelocity().y<-15){
+		if(Core.getBody().getLinearVelocity().y<-15){
 			
 			
-			//body.setFixedRotation(false);
-			//body.applyTorque(50);
+			//Core.getBody().setFixedRotation(false);
+			//Core.getBody().applyTorque(50);
 			//alive=false;
 			
 		}
@@ -191,11 +135,15 @@ public class Character extends Box {
 		
 		 if(alive){
 			 
-			 bullet_time+=delta;
+			 key_delay+=delta;
+			 if(key_delay<0)
+				 key_delay=0;
+			 System.out.println(key_delay);
 			 
-			 if(gameMouse.getLeftMouseDown())
+			 if(gameMouse.getLeftMouseDown() && key_delay>100){
 				 gameController.createSkeleton(new Skeleton(gameWorld,gameController,gameMouse.getWorldX(),gameMouse.getWorldY(),0.5f,0.5f,0.5f));
-
+				 key_delay=0;
+			 }
 			 
 			 if (Keyboard.isKeyDown(Keyboard.KEY_W)){
 				 
@@ -236,13 +184,13 @@ public class Character extends Box {
 				 }
 			 
 			 if(Keyboard.isKeyDown(Keyboard.KEY_G)){
-					body.applyAngularImpulse(1);
+					Core.getBody().applyAngularImpulse(1);
 						
 						
 					
 				 }
 				 if(Keyboard.isKeyDown(Keyboard.KEY_F)){
-					 body.applyAngularImpulse(-1f);
+					 Core.getBody().applyAngularImpulse(-1f);
 							
 							
 						
@@ -261,7 +209,7 @@ public class Character extends Box {
 			 }
 			 //System.out.println(Feet);
 			 if (Keyboard.isKeyDown(Keyboard.KEY_UP)){
-				 if(body.getLinearVelocity().y<=0.1f && body.getLinearVelocity().y>=-0.1f)
+				 if(Core.getBody().getLinearVelocity().y<=0.1f && Core.getBody().getLinearVelocity().y>=-0.1f)
 					applyImpulse(0,6000);
 			 }
 			 
@@ -272,13 +220,13 @@ public class Character extends Box {
 					createProjectile(300,20,2,0.5f);
 					createProjectile(300,0f,2,0);
 					createProjectile(300,-20f,2,-0.5f);
-					body.applyForceToCenter(new Vec2(-200,0));
+					Core.getBody().applyForceToCenter(new Vec2(-200,0));
 				}
 				else{
 					createProjectile(-300,20,-2,0.5f);
 					createProjectile(-300,0f,-2,0);
 					createProjectile(-300,-20f,-2,-0.5f);
-					body.applyForceToCenter(new Vec2(200,0));
+					Core.getBody().applyForceToCenter(new Vec2(200,0));
 				}
 			 }
 		 }
@@ -295,9 +243,9 @@ public class Character extends Box {
 						int randY = rn.nextInt() % n;
 						newX = -10 + randX;
 						newY = -10 + randY;
-						splatterVelocity.x = body.getLinearVelocity().x + newX;
-						splatterVelocity.y = body.getLinearVelocity().x + newY;
-						newBox.body.setLinearVelocity(splatterVelocity);
+						splatterVelocity.x = Core.getBody().getLinearVelocity().x + newX;
+						splatterVelocity.y = Core.getBody().getLinearVelocity().x + newY;
+						newBox.getBody().setLinearVelocity(splatterVelocity);
 						gameController.createBox(newBox);
 					}
 					if(deathDirection==1){
@@ -310,7 +258,7 @@ public class Character extends Box {
 						splatterVelocity.y = newY;
 						
 						Box newBox = new Box(gameWorld,BodyType.DYNAMIC,false,x,y,0.2f,0.2f,1f,1,0,0,1);
-						newBox.body.setLinearVelocity(splatterVelocity);
+						newBox.getBody().setLinearVelocity(splatterVelocity);
 						gameController.createBox(newBox);
 					}
 					if(deathDirection==2){
@@ -321,7 +269,7 @@ public class Character extends Box {
 						newY = -10 + randY;
 						splatterVelocity.y = newY;
 						Box newBox = new Box(gameWorld,BodyType.DYNAMIC,false,x-0.4f,y,0.2f,0.2f,1f,1,0,0,1);
-						newBox.body.setLinearVelocity(splatterVelocity);
+						newBox.getBody().setLinearVelocity(splatterVelocity);
 						gameController.createBox(newBox);
 					}
 					

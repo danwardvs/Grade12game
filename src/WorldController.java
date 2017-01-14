@@ -216,11 +216,11 @@ public class WorldController {
 		  }
 		  
 		  gameNPCs.clear();
-		  gameCharacter.deleteBody();
+		 // gameCharacter.deleteBody();
 		  
 		  gameLevel.load_level("gamedata/Level_"+level+".xml");
 		  score=10;
-		  gameCharacter.body.setLinearVelocity(new Vec2(0,0));
+		  //gameCharacter.body.setLinearVelocity(new Vec2(0,0));
 		  
 		
 	}

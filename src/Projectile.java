@@ -43,12 +43,12 @@ public class Projectile extends Box {
 		}
 		if(owner.equals("Enemy")){
 			for (ContactEdge ce = body.getContactList(); ce != null; ce = ce.next){
-				if (ce.other == gameCharacter.body && ce.contact.isTouching()){
+				//if (ce.other == gameCharacter.body && ce.contact.isTouching()){
 		    	 
-					gameWorld.destroyBody(body);
-					return 2;
-
-				}		
+				//	gameWorld.destroyBody(body);
+					//return 2;
+//
+			//	}		
 			
 			}
 		}

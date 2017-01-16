@@ -51,6 +51,7 @@ public class WorldController {
     	
         gameLevel  = new Level(this,gameWorld,gameMouse,gameCharacter);
 	    gameLevel.load_level("gamedata/Level_"+level+".xml");
+	    
 		
 
    }

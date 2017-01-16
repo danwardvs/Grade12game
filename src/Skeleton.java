@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.ArrayList;
+
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
@@ -22,6 +25,11 @@ public class Skeleton {
 	Colour Skin = new Colour(255,201,180,true);
 	Colour Blue = new Colour(50,50,255,true);
 	Colour Red = new Colour(255,50,50,true);
+	
+
+	List<Box> boneList = new ArrayList<Box>();
+	List<Joint> jointList = new ArrayList<Joint>();
+
 
 	
 	Box Core;
@@ -79,11 +87,11 @@ public class Skeleton {
 		Core = new Box(newWorld,BodyType.DYNAMIC,false,newX,newY,0.5f,0.7f,0,Red.r,Red.g,Red.b,1);
 		
 			
-		LeftThigh = createBodyPart(LeftHip,Core.getBody(),newX-0.25f,newY-1f,0.2f,0.5f,newX-0.25f,newY-0.5f,true,-0.2f,0,Blue);
+		LeftThigh = createBodyPart(LeftHip,Core.getBody(),newX-0.25f,newY-1f,0.2f,0.5f,newX-0.25f,newY-0.5f,false,-0.2f,0,Blue);
 		LeftShin = createBodyPart(LeftKnee,LeftThigh.getBody(),newX-0.25f,newY-2f,0.2f,0.5f,newX-0.25f,newY-1.5f,true,-0.2f,0,Skin);
 		LeftFoot = createBodyPart(LeftAnkle,LeftShin.getBody(),newX-0.5f,newY-2.5f,0.75f,0.2f,newX-0.25f,newY-2.5f,true,-0.2f,0,Black);
 
-		RightThigh = createBodyPart(RightHip,Core.getBody(),newX+0.25f,newY-1f,0.2f,0.5f,newX+0.25f,newY-0.5f,true,0,0.2f,Blue);
+		RightThigh = createBodyPart(RightHip,Core.getBody(),newX+0.25f,newY-1f,0.2f,0.5f,newX+0.25f,newY-0.5f,false,0,0.2f,Blue);
 		RightShin = createBodyPart(RightKnee,RightThigh.getBody(),newX+0.25f,newY-2f,0.2f,0.5f,newX+0.25f,newY-1.5f,true,0,0.2f,Skin);
 		RightFoot = createBodyPart(RightAnkle,RightShin.getBody(),newX+0.5f,newY-2.5f,0.75f,0.2f,newX+0.25f,newY-2.5f,true,0,0.2f,Black);
 			
@@ -92,12 +100,35 @@ public class Skeleton {
 		RightHand = createBodyPart(RightWrist,RightForearm.getBody(),newX-0.75f,newY-1f,0.3f,0.3f,newX-0.75f,newY-0.75f,false,0,0,Skin);
 			
 		LeftUpperArm = createBodyPart(LeftShoulder,Core.getBody(),newX+0.75f,newY,0.2f,0.5f,newX+0.75f,newY+0.25f,false,0,0,Red);
-		LeftForearm = createBodyPart(LeftElbow,LeftUpperArm.getBody(),newX+0.75f,newY-1f,0.2f,0.5f,newX+0.75f,newY-0.25f,false,0,0,Skin);
-		LeftHand = createBodyPart(LeftWrist,LeftForearm.getBody(),newX+0.75f,newY-1.5f,0.3f,0.3f,newX+0.75f,newY-1.25f,false,0,0,Skin);
+		LeftForearm = createBodyPart(LeftElbow,LeftUpperArm.getBody(),newX+0.75f,newY-0.5f,0.2f,0.5f,newX+0.75f,newY-0.25f,false,0,0,Skin);
+		LeftHand = createBodyPart(LeftWrist,LeftForearm.getBody(),newX+0.75f,newY-1f,0.3f,0.3f,newX+0.75f,newY-0.75f,false,0,0,Skin);
 			
 		Neck = createBodyPart(LowerNeck,Core.getBody(),newX,newY+0.75f,0.3f,0.2f,newX,newY+0.75f,true,0,0,Skin);
 			
 		Head = createBodyPart(UpperNeck,Neck.body,newX,newY+1.25f,0.4f,0.4f,newX,newY+1.25f,true,0,0,Skin);
+		
+		boneList.add(LeftThigh);
+		boneList.add(LeftShin);
+		boneList.add(LeftFoot);
+		boneList.add(LeftUpperArm);
+		boneList.add(LeftForearm);
+		boneList.add(LeftHand);
+		
+		boneList.add(RightThigh);
+		boneList.add(RightShin);
+		boneList.add(RightFoot);
+		boneList.add(RightUpperArm);
+		boneList.add(RightForearm);
+		boneList.add(RightHand);
+		
+		boneList.add(Neck);
+		boneList.add(Head);
+		boneList.add(Core);
+		
+		jointList.add(LeftHip);
+		jointList.add(LeftKnee);
+		
+		
 		
 		
 		
@@ -118,7 +149,7 @@ public class Skeleton {
 		RevoluteJointDef jd = new RevoluteJointDef();
 		jd.initialize(newBody, newBox.body, Anchor);
 		jd.enableMotor=true;
-		jd.maxMotorTorque=0;
+		jd.maxMotorTorque=100;
 		jd.motorSpeed=0;
         jd.collideConnected = false;
         jd.enableLimit=newLimits;
@@ -149,40 +180,19 @@ public class Skeleton {
 		return Core.getBody().getPosition().y;
 	}
 	
+	public void update(){
+		for(Box newBones: boneList){
+        	newBones.draw();
+        }
+	
+	}
 	
 	public void draw(){
-		 if(Keyboard.isKeyDown(Keyboard.KEY_Q)){
-				System.out.println(RightShoulder);
-				System.out.println(RightShoulder.getJoint());
-				RightShoulder.getJoint().enableMotor(true);
-				 RightShoulder.getJoint().setMotorSpeed(100);
-					
-					
-				
-			 }
+		 
 		
-		//RightShoulder.getJoint().enableMotor(true);
-		//RightShoulder.getJoint().setMotorSpeed(-1000);
-		Core.draw();
-		
-		LeftThigh.draw();
-		LeftShin.draw();
-		LeftFoot.draw();
-		
-		RightThigh.draw();
-		RightShin.draw();
-		RightFoot.draw();
-		
-		RightUpperArm.draw();
-		RightForearm.draw();
-		RightHand.draw();
-		
-		LeftUpperArm.draw();
-		LeftForearm.draw();
-		LeftHand.draw();
-		
-		Neck.draw();
-		Head.draw();
+		 for(Box newBones: boneList){
+	        	newBones.draw();
+	        }
 		
 	}
 	

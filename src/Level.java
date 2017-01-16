@@ -102,7 +102,7 @@ public class Level {
 					if(object_type.equals("NPC")){
 					
 					
-						gameController.createNPC(new NPC(gameWorld,gameCharacter,gameController,itemtype,direction,BodyType.DYNAMIC,false,x,y,0.5f,0.7f,angle,r,g,b,1));
+						gameController.createSkeleton(new Skeleton(gameWorld,gameController,x,y,r,g,b));
 						
 					}
 

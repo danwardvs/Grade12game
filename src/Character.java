@@ -32,45 +32,6 @@ public class Character extends Skeleton {
 	boolean alive=true;
 	int deathDirection;
 	
-	Box LeftThigh;
-	Box LeftShin;
-	Box LeftFoot;
-	
-	Box RightThigh;
-	Box RightShin;
-	Box RightFoot;
-	
-	Box RightUpperArm;
-	Box RightForearm;
-	Box RightHand;
-	
-	Box LeftUpperArm;
-	Box LeftForearm;
-	Box LeftHand;
-	
-	Box Neck;
-	Box Head;
-	
-	Joint LeftHip = new Joint();
-	Joint LeftKnee = new Joint();
-	Joint LeftAnkle = new Joint();
-	
-	Joint RightHip = new Joint();
-	Joint RightKnee = new Joint();
-	Joint RightAnkle = new Joint();
-	
-	Joint RightShoulder = new Joint();
-	Joint RightElbow = new Joint();
-	Joint RightWrist = new Joint();
-	
-	Joint LeftShoulder = new Joint();
-	Joint LeftElbow = new Joint();
-	Joint LeftWrist = new Joint();
-	
-	Joint LowerNeck = new Joint();
-	Joint UpperNeck = new Joint();
-	
-	
 	
 	Random rn = new Random();
 
@@ -135,6 +96,55 @@ public class Character extends Skeleton {
 		
 		 if(alive){
 			 
+			 if(Keyboard.isKeyDown(Keyboard.KEY_Q)){
+				 	
+				 	RightShoulder.getJoint().setMotorSpeed(-100);
+				 	RightShoulder.getJoint().enableMotor(true);
+	
+					
+			}
+			 if(!Keyboard.isKeyDown(Keyboard.KEY_Q)){
+				 RightShoulder.getJoint().setMotorSpeed(10);
+
+			 }
+			 if(Keyboard.isKeyDown(Keyboard.KEY_E)){
+				 	
+				 	LeftShoulder.getJoint().setMotorSpeed(100);
+				 	LeftShoulder.getJoint().enableMotor(true);
+	
+					
+			}
+			 if(!Keyboard.isKeyDown(Keyboard.KEY_E)){
+				 RightShoulder.getJoint().setMotorSpeed(-10);
+
+			 }
+			 
+			 
+			 if(Keyboard.isKeyDown(Keyboard.KEY_A)){
+				 	
+				 	RightHip.getJoint().setMotorSpeed(-100);
+				 	RightHip.getJoint().enableMotor(true);
+	
+					
+			}
+			 if(!Keyboard.isKeyDown(Keyboard.KEY_A)){
+				 	RightHip.getJoint().enableMotor(false);
+
+			 }
+			 if(Keyboard.isKeyDown(Keyboard.KEY_D)){
+				 	
+				 	LeftHip.getJoint().setMotorSpeed(100);
+				 	LeftHip.getJoint().enableMotor(true);
+	
+					
+			}
+			 if(!Keyboard.isKeyDown(Keyboard.KEY_D)){
+				 	LeftHip.getJoint().enableMotor(false);
+
+			 }
+			 
+			 
+			 
 			 key_delay+=delta;
 			 if(key_delay<0)
 				 key_delay=0;
@@ -144,44 +154,28 @@ public class Character extends Skeleton {
 				 key_delay=0;
 			 }
 			 
-			 if (Keyboard.isKeyDown(Keyboard.KEY_W)){
+			 if (Keyboard.isKeyDown(Keyboard.KEY_8)){
 				 
 				 
-				 gameWorld.setGravity(new Vec2(gameWorld.getGravity().x,gameWorld.getGravity().y+0.5f));
-
-			 }
-			 
-			 if (Keyboard.isKeyDown(Keyboard.KEY_A)){
-				 gameWorld.setGravity(new Vec2(gameWorld.getGravity().x-0.5f,gameWorld.getGravity().y));
-
-			 }
-			 
-			 if (Keyboard.isKeyDown(Keyboard.KEY_D)){
-				 gameWorld.setGravity(new Vec2(gameWorld.getGravity().x+0.5f,gameWorld.getGravity().y));
-
-			 }
-			 
-			 if (Keyboard.isKeyDown(Keyboard.KEY_S)){
 				 gameWorld.setGravity(new Vec2(gameWorld.getGravity().x,gameWorld.getGravity().y-0.5f));
 
 			 }
-			
-			 if(Keyboard.isKeyDown(Keyboard.KEY_E)){
-					System.out.println(RightShoulder);
-					 RightShoulder.getJoint().enableMotor(false);
-					 //gameWorld.destroyJoint(RightShoulder);
-						
-						
-					
-				 }
 			 
-			 if(Keyboard.isKeyDown(Keyboard.KEY_G)){
+			 if (Keyboard.isKeyDown(Keyboard.KEY_9)){
+				 gameWorld.setGravity(new Vec2(gameWorld.getGravity().x,gameWorld.getGravity().y+0.5f));
+
+			 }
+			
+			
+
+			 
+			 if(Keyboard.isKeyDown(Keyboard.KEY_F)){
 					Core.getBody().applyAngularImpulse(1);
 						
 						
 					
 				 }
-				 if(Keyboard.isKeyDown(Keyboard.KEY_F)){
+				 if(Keyboard.isKeyDown(Keyboard.KEY_G)){
 					 Core.getBody().applyAngularImpulse(-1f);
 							
 							
@@ -191,14 +185,7 @@ public class Character extends Skeleton {
 			 
 			 
 			 
-			 if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT) || Keyboard.isKeyDown(Keyboard.KEY_D) ){
-				 applyImpulse(movement_speed,0);
-				 direction=true;
-			 }
-			 if (Keyboard.isKeyDown(Keyboard.KEY_LEFT) || Keyboard.isKeyDown(Keyboard.KEY_A) ){
-					applyImpulse(-movement_speed,0);
-					direction=false;
-			 }
+		
 			 //System.out.println(Feet);
 			 if (Keyboard.isKeyDown(Keyboard.KEY_UP)){
 				 if(Core.getBody().getLinearVelocity().y<=0.1f && Core.getBody().getLinearVelocity().y>=-0.1f)

@@ -87,25 +87,25 @@ public class Skeleton {
 		Core = new Box(newWorld,BodyType.DYNAMIC,false,newX,newY,0.5f,0.7f,0,Red.r,Red.g,Red.b,1);
 		
 			
-		LeftThigh = createBodyPart(LeftHip,Core.getBody(),newX-0.25f,newY-1f,0.2f,0.5f,newX-0.25f,newY-0.5f,false,-0.2f,0,Blue);
-		LeftShin = createBodyPart(LeftKnee,LeftThigh.getBody(),newX-0.25f,newY-2f,0.2f,0.5f,newX-0.25f,newY-1.5f,true,-0.2f,0,Skin);
-		LeftFoot = createBodyPart(LeftAnkle,LeftShin.getBody(),newX-0.5f,newY-2.5f,0.75f,0.2f,newX-0.25f,newY-2.5f,true,-0.2f,0,Black);
+		LeftThigh = createBodyPart(LeftHip,Core.getBody(),newX-0.25f,newY-1f,0.2f,0.5f,newX-0.25f,newY-0.5f,true,-0.2f,0,-0.5f,Blue);
+		LeftShin = createBodyPart(LeftKnee,LeftThigh.getBody(),newX-0.25f,newY-2f,0.2f,0.5f,newX-0.25f,newY-1.5f,true,-0.2f,0,0.5f,Skin);
+		LeftFoot = createBodyPart(LeftAnkle,LeftShin.getBody(),newX-0.5f,newY-2.5f,0.5f,0.2f,newX-0.25f,newY-2.5f,true,-0.2f,0,0,Black);
 
-		RightThigh = createBodyPart(RightHip,Core.getBody(),newX+0.25f,newY-1f,0.2f,0.5f,newX+0.25f,newY-0.5f,false,0,0.2f,Blue);
-		RightShin = createBodyPart(RightKnee,RightThigh.getBody(),newX+0.25f,newY-2f,0.2f,0.5f,newX+0.25f,newY-1.5f,true,0,0.2f,Skin);
-		RightFoot = createBodyPart(RightAnkle,RightShin.getBody(),newX+0.5f,newY-2.5f,0.75f,0.2f,newX+0.25f,newY-2.5f,true,0,0.2f,Black);
+		RightThigh = createBodyPart(RightHip,Core.getBody(),newX+0.25f,newY-1f,0.2f,0.5f,newX+0.25f,newY-0.5f,true,-0.4f,0.4f,0.5f,Blue);
+		RightShin = createBodyPart(RightKnee,RightThigh.getBody(),newX+0.25f,newY-2f,0.2f,0.5f,newX+0.25f,newY-1.5f,true,-0.4f,0.4f,-0.5f,Skin);
+		RightFoot = createBodyPart(RightAnkle,RightShin.getBody(),newX+0.5f,newY-2.5f,0.5f,0.2f,newX+0.25f,newY-2.5f,true,0,0.2f,0,Black);
 			
-		RightUpperArm = createBodyPart(RightShoulder,Core.getBody(),newX-0.75f,newY,0.2f,0.5f,newX-0.75f,newY+0.25f,false,-3.0f,2.0f,Red);
-		RightForearm = createBodyPart(RightElbow,RightUpperArm.getBody(),newX-0.75f,newY-0.5f,0.2f,0.5f,newX-0.75f,newY-0.25f,false,0,0,Skin);
-		RightHand = createBodyPart(RightWrist,RightForearm.getBody(),newX-0.75f,newY-1f,0.3f,0.3f,newX-0.75f,newY-0.75f,false,0,0,Skin);
+		RightUpperArm = createBodyPart(RightShoulder,Core.getBody(),newX-0.75f,newY,0.2f,0.5f,newX-0.75f,newY+0.25f,false,-3.0f,2.0f,0,Red);
+		RightForearm = createBodyPart(RightElbow,RightUpperArm.getBody(),newX-0.75f,newY-0.5f,0.2f,0.5f,newX-0.75f,newY-0.25f,false,0,0,0,Skin);
+		RightHand = createBodyPart(RightWrist,RightForearm.getBody(),newX-0.75f,newY-1f,0.3f,0.3f,newX-0.75f,newY-0.75f,false,0,0,0,Skin);
 			
-		LeftUpperArm = createBodyPart(LeftShoulder,Core.getBody(),newX+0.75f,newY,0.2f,0.5f,newX+0.75f,newY+0.25f,false,0,0,Red);
-		LeftForearm = createBodyPart(LeftElbow,LeftUpperArm.getBody(),newX+0.75f,newY-0.5f,0.2f,0.5f,newX+0.75f,newY-0.25f,false,0,0,Skin);
-		LeftHand = createBodyPart(LeftWrist,LeftForearm.getBody(),newX+0.75f,newY-1f,0.3f,0.3f,newX+0.75f,newY-0.75f,false,0,0,Skin);
+		LeftUpperArm = createBodyPart(LeftShoulder,Core.getBody(),newX+0.75f,newY,0.2f,0.5f,newX+0.75f,newY+0.25f,false,0,0,0,Red);
+		LeftForearm = createBodyPart(LeftElbow,LeftUpperArm.getBody(),newX+0.75f,newY-0.5f,0.2f,0.5f,newX+0.75f,newY-0.25f,false,0,0,0,Skin);
+		LeftHand = createBodyPart(LeftWrist,LeftForearm.getBody(),newX+0.75f,newY-1f,0.3f,0.3f,newX+0.75f,newY-0.75f,false,0,0,0,Skin);
 			
-		Neck = createBodyPart(LowerNeck,Core.getBody(),newX,newY+0.75f,0.3f,0.2f,newX,newY+0.75f,true,0,0,Skin);
+		Neck = createBodyPart(LowerNeck,Core.getBody(),newX,newY+0.75f,0.3f,0.2f,newX,newY+0.75f,true,0,0,0,Skin);
 			
-		Head = createBodyPart(UpperNeck,Neck.body,newX,newY+1.25f,0.4f,0.4f,newX,newY+1.25f,true,0,0,Skin);
+		Head = createBodyPart(UpperNeck,Neck.body,newX,newY+1.25f,0.4f,0.4f,newX,newY+1.25f,true,0,0,0,Skin);
 		
 		boneList.add(LeftThigh);
 		boneList.add(LeftShin);
@@ -127,8 +127,24 @@ public class Skeleton {
 		
 		jointList.add(LeftHip);
 		jointList.add(LeftKnee);
+		jointList.add(LeftAnkle);
 		
+		jointList.add(LeftShoulder);
+		jointList.add(LeftElbow);
+		jointList.add(LeftWrist);
 		
+		jointList.add(RightHip);
+		jointList.add(RightKnee);
+		jointList.add(RightAnkle);
+		
+		jointList.add(RightShoulder);
+		jointList.add(RightElbow);
+		jointList.add(RightWrist);
+		
+		jointList.add(UpperNeck);
+		jointList.add(LowerNeck);
+		
+	
 		
 		
 		
@@ -137,7 +153,7 @@ public class Skeleton {
 	//This function creates a body part based on a revolutejoint that is passed
 	public Box createBodyPart(Joint newJoint, Body newBody,float newX, float newY,float newWidth, float newHeight, float newAnchorX, float newAnchorY,boolean newLimits, float newLowerLimit, float newUpperLimit,
 			
-			Colour newColour){
+			float newReferenceAngle, Colour newColour){
 		
 		Box newBox = new Box(gameWorld,BodyType.DYNAMIC,false,newX,newY,newWidth,newHeight,0,newColour.r,newColour.g,newColour.b,1);
 		//newBox.body.setAngularDamping(1000000000);
@@ -147,6 +163,7 @@ public class Skeleton {
 		Vec2 Anchor = new Vec2(newAnchorX,newAnchorY);
 		
 		RevoluteJointDef jd = new RevoluteJointDef();
+		
 		jd.initialize(newBody, newBox.body, Anchor);
 		jd.enableMotor=true;
 		jd.maxMotorTorque=100;
@@ -155,10 +172,13 @@ public class Skeleton {
         jd.enableLimit=newLimits;
         jd.upperAngle=newUpperLimit;
         jd.lowerAngle=newLowerLimit;
-        jd.referenceAngle=0;
+        jd.referenceAngle=newReferenceAngle;
+        jd.enableMotor=true;
+        
    
         newJoint.setJoint((RevoluteJoint) gameWorld.createJoint(jd));
         System.out.println(newJoint);
+        
     
 		return newBox;	
 		
@@ -181,9 +201,7 @@ public class Skeleton {
 	}
 	
 	public void update(){
-		for(Box newBones: boneList){
-        	newBones.draw();
-        }
+		
 	
 	}
 	

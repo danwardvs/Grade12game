@@ -95,6 +95,63 @@ public class Character extends Skeleton {
 		 }
 		
 		 if(alive){
+			 if(Keyboard.isKeyDown(Keyboard.KEY_O)){
+				 for(Joint newJoint: jointList){
+		        	gameWorld.destroyJoint(newJoint.getJoint());
+		        }
+			 }
+			
+			 
+			 
+			 
+			 
+			 if(Keyboard.isKeyDown(Keyboard.KEY_Z)){
+				 	
+				 	RightHip.getJoint().setMotorSpeed(10);
+				 	RightHip.getJoint().enableMotor(true);
+				 	
+				 	RightKnee.getJoint().setMotorSpeed(-10);
+				 	RightKnee.getJoint().enableMotor(true);
+				 	
+				 	RightAnkle.getJoint().setMotorSpeed(-100);
+				 	RightAnkle.getJoint().enableMotor(true);
+				 	//Core.getBody().applyAngularImpulse(0.1f);
+				 	
+
+	
+					
+			}
+			 if(!Keyboard.isKeyDown(Keyboard.KEY_Z)){
+				 RightKnee.getJoint().enableMotor(false);
+				 RightHip.getJoint().enableMotor(false);
+				 RightAnkle.getJoint().enableMotor(false);
+
+
+			 }
+			 
+			 if(Keyboard.isKeyDown(Keyboard.KEY_X)){
+				 	
+				 LeftHip.getJoint().setMotorSpeed(-10);
+				 	LeftHip.getJoint().enableMotor(true);
+				 	
+				 	LeftKnee.getJoint().setMotorSpeed(10);
+				 	LeftKnee.getJoint().enableMotor(true);
+				 	
+				 	LeftAnkle.getJoint().setMotorSpeed(100);
+				 	LeftAnkle.getJoint().enableMotor(true);
+				 	//Core.getBody().applyAngularImpulse(-0.1f);
+
+	
+					
+			}
+			 if(!Keyboard.isKeyDown(Keyboard.KEY_X)){
+				 LeftKnee.getJoint().enableMotor(false);
+				 LeftHip.getJoint().enableMotor(false);
+				 LeftAnkle.getJoint().enableMotor(false);
+
+
+			 }
+			 
 			 
 			 if(Keyboard.isKeyDown(Keyboard.KEY_Q)){
 				 	
@@ -115,7 +172,7 @@ public class Character extends Skeleton {
 					
 			}
 			 if(!Keyboard.isKeyDown(Keyboard.KEY_E)){
-				 RightShoulder.getJoint().setMotorSpeed(-10);
+				 LeftShoulder.getJoint().setMotorSpeed(-10);
 
 			 }
 			 

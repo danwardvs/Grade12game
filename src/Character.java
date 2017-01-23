@@ -133,7 +133,9 @@ public class Character extends Skeleton {
 				 	RightAnkle.getJoint().enableMotor(true);
 				 	RightHip.getJoint().enableLimit(false);
 
-				 	//Core.getBody().applyAngularImpulse(0.1f);
+				 	Core.getBody().applyAngularImpulse(0.1f);
+
+					 Core.getBody().applyForceToCenter(new Vec2(10f,0));
 				 	
 
 	
@@ -169,7 +171,8 @@ public class Character extends Skeleton {
 				 	LeftAnkle.getJoint().enableMotor(true);
 				 	LeftHip.getJoint().enableLimit(false);
 
-				 	//Core.getBody().applyAngularImpulse(-0.1f);
+				 	Core.getBody().applyAngularImpulse(-0.1f);
+				 	Core.getBody().applyForceToCenter(new Vec2(-10f,0));
 
 	
 					
@@ -181,6 +184,10 @@ public class Character extends Skeleton {
 				 LeftHip.getJoint().enableLimit(true);
 				 LeftKnee.getJoint().enableLimit(true);
 				 LeftAnkle.getJoint().enableLimit(true);
+				 
+				
+
+
 
 
 			 }
@@ -195,6 +202,7 @@ public class Character extends Skeleton {
 			}
 			 if(!Keyboard.isKeyDown(control_right_arm)){
 				 RightShoulder.getJoint().setMotorSpeed(10);
+				 
 
 			 }
 			 if(Keyboard.isKeyDown(control_left_arm)){

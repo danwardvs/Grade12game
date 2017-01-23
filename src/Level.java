@@ -94,9 +94,13 @@ public class Level {
 					}
 					if(object_type.equals("Character")){
 			
-						if(body_type.equals("DYNAMIC")){
+						if(body_type.equals("1")){
 							gameCharacter = new Character(gameWorld,gameController,gameMouse,x,y,r,g,b);
-							gameController.createCharacter(gameCharacter);
+							gameController.createCharacter1(gameCharacter);
+						}
+						if(body_type.equals("2")){
+							gameCharacter = new Character(gameWorld,gameController,gameMouse,x,y,r,g,b);
+							gameController.createCharacter2(gameCharacter);
 						}
 					}
 					if(object_type.equals("NPC")){

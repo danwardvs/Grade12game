@@ -28,9 +28,16 @@ public class Character extends Skeleton {
 	int key_delay;
 	boolean hasDied = false;
 	boolean direction;
+	
+	int control_right_leg;
+	int control_left_leg;
+	int control_right_arm;
+	int control_left_arm;
+	
 
 	boolean alive=true;
 	int deathDirection;
+	
 	
 	
 	Random rn = new Random();
@@ -58,7 +65,13 @@ public class Character extends Skeleton {
 	public void setState(boolean newAlive){
 		alive = newAlive;
 	}
-
+	
+	public void setControls(int newLeftLeg, int newRightLeg, int newLeftArm, int newRightArm){
+		control_left_leg = newLeftLeg;
+		control_right_leg = newRightLeg;
+		control_left_arm = newLeftArm;
+		control_right_arm = newRightArm;
+	}
 	
 	public void update(int delta){
 		
@@ -95,89 +108,109 @@ public class Character extends Skeleton {
 		 }
 		
 		 if(alive){
-			 if(Keyboard.isKeyDown(Keyboard.KEY_O)){
-				 for(Joint newJoint: jointList){
-		        	gameWorld.destroyJoint(newJoint.getJoint());
-		        }
+			 if(Keyboard.isKeyDown(Keyboard.KEY_P)){
+				alive=false;
 			 }
 			
+	
+
 			 
 			 
 			 
-			 
-			 if(Keyboard.isKeyDown(Keyboard.KEY_Z)){
+			 if(Keyboard.isKeyDown(control_right_leg)){
 				 	
-				 	RightHip.getJoint().setMotorSpeed(10);
+				 	RightHip.getJoint().setMotorSpeed(100);
 				 	RightHip.getJoint().enableMotor(true);
+				 	RightHip.getJoint().enableLimit(false);
 				 	
-				 	RightKnee.getJoint().setMotorSpeed(-10);
+				 	
+				 	RightKnee.getJoint().setMotorSpeed(-100);
 				 	RightKnee.getJoint().enableMotor(true);
+				 	RightHip.getJoint().enableLimit(false);
+
 				 	
 				 	RightAnkle.getJoint().setMotorSpeed(-100);
 				 	RightAnkle.getJoint().enableMotor(true);
+				 	RightHip.getJoint().enableLimit(false);
+
 				 	//Core.getBody().applyAngularImpulse(0.1f);
 				 	
 
 	
 					
 			}
-			 if(!Keyboard.isKeyDown(Keyboard.KEY_Z)){
+			 if(!Keyboard.isKeyDown(control_right_leg)){
 				 RightKnee.getJoint().enableMotor(false);
 				 RightHip.getJoint().enableMotor(false);
 				 RightAnkle.getJoint().enableMotor(false);
+				 RightHip.getJoint().enableLimit(true);
+				 RightKnee.getJoint().enableLimit(true);
+				 RightAnkle.getJoint().enableLimit(true);
+
+
+
 
 
 			 }
 			 
-			 if(Keyboard.isKeyDown(Keyboard.KEY_X)){
+			 if(Keyboard.isKeyDown(control_left_leg)){
 				 	
-				 LeftHip.getJoint().setMotorSpeed(-10);
+				 	LeftHip.getJoint().setMotorSpeed(-100);
 				 	LeftHip.getJoint().enableMotor(true);
+				 	LeftHip.getJoint().enableLimit(false);
+
 				 	
-				 	LeftKnee.getJoint().setMotorSpeed(10);
+				 	LeftKnee.getJoint().setMotorSpeed(100);
 				 	LeftKnee.getJoint().enableMotor(true);
+				 	LeftHip.getJoint().enableLimit(false);
+
 				 	
 				 	LeftAnkle.getJoint().setMotorSpeed(100);
 				 	LeftAnkle.getJoint().enableMotor(true);
+				 	LeftHip.getJoint().enableLimit(false);
+
 				 	//Core.getBody().applyAngularImpulse(-0.1f);
 
 	
 					
 			}
-			 if(!Keyboard.isKeyDown(Keyboard.KEY_X)){
+			 if(!Keyboard.isKeyDown(control_left_leg)){
 				 LeftKnee.getJoint().enableMotor(false);
 				 LeftHip.getJoint().enableMotor(false);
 				 LeftAnkle.getJoint().enableMotor(false);
+				 LeftHip.getJoint().enableLimit(true);
+				 LeftKnee.getJoint().enableLimit(true);
+				 LeftAnkle.getJoint().enableLimit(true);
 
 
 			 }
 			 
 			 
-			 if(Keyboard.isKeyDown(Keyboard.KEY_Q)){
+			 if(Keyboard.isKeyDown(control_right_arm)){
 				 	
 				 	RightShoulder.getJoint().setMotorSpeed(-100);
 				 	RightShoulder.getJoint().enableMotor(true);
 	
 					
 			}
-			 if(!Keyboard.isKeyDown(Keyboard.KEY_Q)){
+			 if(!Keyboard.isKeyDown(control_right_arm)){
 				 RightShoulder.getJoint().setMotorSpeed(10);
 
 			 }
-			 if(Keyboard.isKeyDown(Keyboard.KEY_E)){
+			 if(Keyboard.isKeyDown(control_left_arm)){
 				 	
 				 	LeftShoulder.getJoint().setMotorSpeed(100);
 				 	LeftShoulder.getJoint().enableMotor(true);
 	
 					
 			}
-			 if(!Keyboard.isKeyDown(Keyboard.KEY_E)){
+			 if(!Keyboard.isKeyDown(control_left_arm)){
 				 LeftShoulder.getJoint().setMotorSpeed(-10);
 
 			 }
 			 
 			 
-			 if(Keyboard.isKeyDown(Keyboard.KEY_A)){
+			/* if(Keyboard.isKeyDown(Keyboard.KEY_A)){
 				 	
 				 	RightHip.getJoint().setMotorSpeed(-100);
 				 	RightHip.getJoint().enableMotor(true);
@@ -198,7 +231,7 @@ public class Character extends Skeleton {
 			 if(!Keyboard.isKeyDown(Keyboard.KEY_D)){
 				 	LeftHip.getJoint().enableMotor(false);
 
-			 }
+			 }*/
 			 
 			 
 			 
@@ -267,8 +300,9 @@ public class Character extends Skeleton {
 			 }
 		 }
 		 if(alive==false && hasDied==false){
-				for(int i = 0; i<25; i++){
-					Vec2 splatterVelocity = new Vec2(10,0);
+			 	removeJoints();
+				for(int i = 0; i<50; i++){
+					Vec2 splatterVelocity = new Vec2((rn.nextFloat()*20)-10,(rn.nextFloat()*20)-10);
 					if(deathDirection==0){
 						Box newBox = new Box(gameWorld,BodyType.DYNAMIC,false,x,y,0.2f,0.2f,1f,1,0,0,1);
 						splatterVelocity = new Vec2(0,0);

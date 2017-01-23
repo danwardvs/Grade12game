@@ -31,7 +31,9 @@ public class WorldController {
 	List<Projectile> gameProjectiles = new ArrayList<Projectile>();
 	List<NPC> gameNPCs = new ArrayList<NPC>();
 	List<Skeleton> gameSkeletons = new ArrayList<Skeleton>();
-	Character gameCharacter;
+	Character gameCharacter1;
+	Character gameCharacter2;
+
 	static World gameWorld;
 	Level gameLevel;
 	
@@ -49,8 +51,11 @@ public class WorldController {
 	
     public void start() {
     	
-        gameLevel  = new Level(this,gameWorld,gameMouse,gameCharacter);
+        gameLevel  = new Level(this,gameWorld,gameMouse,gameCharacter1);
 	    gameLevel.load_level("gamedata/Level_"+level+".xml");
+	    gameCharacter1.setControls(Keyboard.KEY_A,Keyboard.KEY_D , Keyboard.KEY_E, Keyboard.KEY_Q);
+	    gameCharacter2.setControls(Keyboard.KEY_J,Keyboard.KEY_L , Keyboard.KEY_O, Keyboard.KEY_U);
+
 	    
 		
 
@@ -68,7 +73,8 @@ public class WorldController {
     	
   
 		 
-		gameCharacter.update(delta);
+		gameCharacter1.update(delta);
+		gameCharacter2.update(delta);
 		
 		for(int j = 0; j < gameProjectiles.size(); j++)
 		{
@@ -83,7 +89,7 @@ public class WorldController {
 		        break;
 		    }
 		    if(result==2){
-		    	gameCharacter.setState(false);
+		    	//gameCharacter1.setState(false);
 		    }
 
 		}
@@ -157,7 +163,9 @@ public class WorldController {
         
         
         
-        gameCharacter.draw();
+        gameCharacter1.draw();
+        gameCharacter2.draw();
+
        gameMouse.draw();
         //GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 
@@ -191,9 +199,15 @@ public class WorldController {
 	}
 	
 	
-	public void createCharacter(Character newCharacter){
+	public void createCharacter1(Character newCharacter){
 
-		gameCharacter = newCharacter;
+		gameCharacter1 = newCharacter;
+			
+	} 
+	
+	public void createCharacter2(Character newCharacter){
+
+		gameCharacter2 = newCharacter;
 			
 	} 
 	public void clearWorld(){

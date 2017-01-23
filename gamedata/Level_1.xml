@@ -9,25 +9,23 @@
 		<r>1</r>
 		<g>1</g>
 		<b>0</b>
-		<bodytype>DYNAMIC</bodytype>
+		<bodytype>1</bodytype>
+	</object>
+
+<object type="Character">
+		<x>0</x>
+		<y>-9</y>
+		<width>0.5</width>
+		<height>1</height>
+		<angle>0</angle>
+		<r>1</r>
+		<g>1</g>
+		<b>0</b>
+		<bodytype>2</bodytype>
 	</object>
 	
 
 	 
-
-
-	<object type="NPC">
-		<itemtype>Door</itemtype>
-		<x>0</x>
-		<y>-9</y>
-		<width>0.2</width>
-		<height>2</height>
-		<angle>0</angle>
-		<r>0</r>
-		<g>1</g>
-		<b>1</b>
-		<bodytype>KINEMATIC</bodytype>
-	</object>
 
 	<object type="Box">
 		<x>5</x>

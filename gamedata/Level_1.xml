@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <level>
 	<object type="Character">
-		<x>-10</x>
-		<y>-9</y>
+		<x>-5</x>
+		<y>-3</y>
 		<width>0.5</width>
 		<height>1</height>
 		<angle>0</angle>
@@ -13,8 +13,8 @@
 	</object>
 
 <object type="Character">
-		<x>0</x>
-		<y>-9</y>
+		<x>5</x>
+		<y>-3</y>
 		<width>0.5</width>
 		<height>1</height>
 		<angle>0</angle>
@@ -28,15 +28,51 @@
 	 
 
 	<object type="Box">
-		<x>5</x>
-		<y>-14</y>
-		<width>0.2</width>
-		<height>0.2</height>
+		<x>0</x>
+		<y>-15</y>
+		<width>10</width>
+		<height>10</height>
+		<angle>0</angle>
+		<r>0.2</r>
+		<g>0.2</g>
+		<b>0.2</b>
+		<bodytype>KINEMATIC</bodytype>
+	</object>
+
+	<object type="Box">
+		<x>20</x>
+		<y>0</y>
+		<width>1</width>
+		<height>40</height>
 		<angle>0</angle>
 		<r>0</r>
 		<g>0</g>
 		<b>1</b>
-		<bodytype>DYNAMIC</bodytype>
+		<bodytype>KINEMATIC</bodytype>
+	</object>
+
+	<object type="Box">
+		<x>-20</x>
+		<y>0</y>
+		<width>1</width>
+		<height>40</height>
+		<angle>0</angle>
+		<r>0</r>
+		<g>0</g>
+		<b>1</b>
+		<bodytype>KINEMATIC</bodytype>
+	</object>
+
+	<object type="Box">
+		<x>0</x>
+		<y>-15</y>
+		<width>40</width>
+		<height>1</height>
+		<angle>0</angle>
+		<r>0</r>
+		<g>0</g>
+		<b>1</b>
+		<bodytype>KINEMATIC</bodytype>
 	</object>
 	
 	

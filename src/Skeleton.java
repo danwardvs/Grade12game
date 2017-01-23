@@ -11,6 +11,7 @@ import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.joints.RevoluteJoint;
 import org.jbox2d.dynamics.joints.RevoluteJointDef;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
 
 public class Skeleton {
 	
@@ -189,6 +190,12 @@ public class Skeleton {
 	        }
 	}
 	
+	public void removeBodys(){
+		 for(Box newBody: boneList){
+	        	gameWorld.destroyBody(newBody.getBody());
+	        }
+	}
+	
 	
 	
 	public void applyTorque(float newTorque){
@@ -212,13 +219,53 @@ public class Skeleton {
 		
 	
 	}
+	public void drawRect(float angle,float x, float y, float width, float height, Colour newColour){
+		
+		// draw quad
+		GL11.glLoadIdentity();
+		GL11.glPushMatrix();
+		GL11.glTranslatef(x, y, 0);
+		GL11.glTranslatef(400, 300, 0);
+		GL11.glRotatef((float)Math.toDegrees(angle), 0, 0, 1);
+		GL11.glTranslatef(-x, -y, 0);
+		GL11.glTranslatef(-400, -300, 0);
+		GL11.glTranslatef(400, 300, 0);
+
+		GL11.glBegin(GL11.GL_QUADS);
+					
+			GL11.glColor4f(0,0,0,1);
+			GL11.glVertex2f(x-(width/2),y-(height/2));
+			GL11.glVertex2f(x-(width/2)+width,y-(height/2));
+			GL11.glVertex2f(x-(width/2)+width,y+height-(height/2));
+			GL11.glVertex2f(x-(width/2),y+height-(height/2));
+				
+			GL11.glColor4f(newColour.r,newColour.g,newColour.b,1);
+			GL11.glVertex2f(x-(width/2)+1,y-(height/2)+1);
+			GL11.glVertex2f(x-(width/2)+width-1,y-(height/2)+1);
+			GL11.glVertex2f(x-(width/2)+width-1,y+height-(height/2)-1);
+			GL11.glVertex2f(x-(width/2)+1,y+height-(height/2)-1);
+	            	
+		GL11.glEnd();
+	            
+	            
+	    GL11.glPopMatrix();
+		}
 	
 	public void draw(){
 		 
 		
-		 for(Box newBones: boneList){
-	        	newBones.draw();
-	        }
+		for(Box newBones: boneList){
+	       	newBones.draw();
+	    }
+	
+
+
+		drawRect(Head.getBody().getAngle(),(Head.getX() - 0.2f)*20,(Head.getY() + 0.1f)*20,4f,4f,Blue);
+		drawRect(Head.getBody().getAngle(),(Head.getX() + 0.2f)*20,(Head.getY() + 0.1f)*20,4f,4f,Blue);
+		drawRect(Head.getBody().getAngle(),(Head.getX())*20,(Head.getY() - 0.2f)*20,8f,4f,Red);
+
+
+		 
 		
 	}
 	

@@ -15,6 +15,7 @@ import java.util.Random;
 
 
 
+
 public class Character extends Skeleton {
 	
 	float movement_speed=50;
@@ -33,8 +34,15 @@ public class Character extends Skeleton {
 	int control_left_leg;
 	int control_right_arm;
 	int control_left_arm;
+	int control_ult;
+	int control_jump;
 	
-
+	int ult_timer;
+	int ult_frame;
+	
+	int jump_timer;
+	int jump_frame;
+	
 	boolean alive=true;
 	int deathDirection;
 	
@@ -66,14 +74,66 @@ public class Character extends Skeleton {
 		alive = newAlive;
 	}
 	
-	public void setControls(int newLeftLeg, int newRightLeg, int newLeftArm, int newRightArm){
+	public void setControls(int newLeftLeg, int newRightLeg, int newLeftArm, int newRightArm, int newUlt, int newJump){
 		control_left_leg = newLeftLeg;
 		control_right_leg = newRightLeg;
 		control_left_arm = newLeftArm;
 		control_right_arm = newRightArm;
+		control_ult = newUlt;
+		control_jump = newJump;
 	}
 	
+	public void draw(){
+		super.draw();
+		if(gameController.gameCharacter1==this){
+			drawRect(0,-250,250,200,40,new Colour((float)255-ult_timer,(float)ult_timer,0f,true));
+			
+			drawRect(0,-250,200,200,40,new Colour((float)255-jump_timer,(float)jump_timer,0f,true));
+
+
+		}
+		if(gameController.gameCharacter2==this){
+			drawRect(0,250,250,200,40,new Colour((float)255-ult_timer,(float)ult_timer,0f,true));
+			
+			drawRect(0,250,200,200,40,new Colour((float)255-jump_timer,(float)jump_timer,0f,true));
+
+		}
+	}
+	public void delete(){
+	 	removeJoints();
+		removeBodys();
+
+	}
+	
+	
 	public void update(int delta){
+		if(delta<0)
+			delta=0;
+		
+		ult_frame+=delta;
+	
+
+		if(ult_frame>100){
+			ult_timer++;
+			ult_frame=0;
+		}
+		
+		if(ult_timer>255)
+			ult_timer=255;
+		
+		
+		jump_frame+=delta;
+		
+
+		if(jump_frame>50){
+			jump_timer++;
+			jump_frame=0;
+		}
+		
+		if(jump_timer>255)
+			jump_timer=255;
+
+			
 		
 		//System.out.println(RightShoulder.bodyA);
 		
@@ -118,6 +178,12 @@ public class Character extends Skeleton {
 			 
 			 
 			 if(Keyboard.isKeyDown(control_right_leg)){
+				 
+				 if(Keyboard.isKeyDown(control_ult) && ult_timer==255){
+					 	applyImpulse(5000,0);
+					 	ult_timer=0;
+
+				 	}
 				 	
 				 	RightHip.getJoint().setMotorSpeed(100);
 				 	RightHip.getJoint().enableMotor(true);
@@ -156,6 +222,13 @@ public class Character extends Skeleton {
 			 }
 			 
 			 if(Keyboard.isKeyDown(control_left_leg)){
+				 
+				 	if(Keyboard.isKeyDown(control_ult) && ult_timer==255){
+					 	applyImpulse(-5000,0);
+					 	ult_timer=0;
+
+				 	}
+				 		
 				 	
 				 	LeftHip.getJoint().setMotorSpeed(-100);
 				 	LeftHip.getJoint().enableMotor(true);
@@ -247,6 +320,9 @@ public class Character extends Skeleton {
 			 if(key_delay<0)
 				 key_delay=0;
 			 
+			 if(getY()<-6)
+				 alive=false;
+			 
 			 if(gameMouse.getLeftMouseDown() && key_delay>100){
 				 gameController.createSkeleton(new Skeleton(gameWorld,gameController,gameMouse.getWorldX(),gameMouse.getWorldY(),0.5f,0.5f,0.5f));
 				 key_delay=0;
@@ -267,27 +343,13 @@ public class Character extends Skeleton {
 			
 
 			 
-			 if(Keyboard.isKeyDown(Keyboard.KEY_F)){
-					Core.getBody().applyAngularImpulse(1);
-						
-						
-					
-				 }
-				 if(Keyboard.isKeyDown(Keyboard.KEY_G)){
-					 Core.getBody().applyAngularImpulse(-1f);
-							
-							
-						
-					 }
-				 
-			 
-			 
+	
 			 
 		
 			 //System.out.println(Feet);
-			 if (Keyboard.isKeyDown(Keyboard.KEY_UP)){
-				 if(Core.getBody().getLinearVelocity().y<=0.1f && Core.getBody().getLinearVelocity().y>=-0.1f)
-					applyImpulse(0,6000);
+			 if (Keyboard.isKeyDown(control_jump) && jump_timer==255){
+					applyImpulse(0,5000);
+					jump_timer=0;
 			 }
 			 
 			 
@@ -310,51 +372,26 @@ public class Character extends Skeleton {
 		 if(alive==false && hasDied==false){
 			 	removeJoints();
 				for(int i = 0; i<50; i++){
-					Vec2 splatterVelocity = new Vec2((rn.nextFloat()*20)-10,(rn.nextFloat()*20)-10);
-					if(deathDirection==0){
-						Box newBox = new Box(gameWorld,BodyType.DYNAMIC,false,x,y,0.2f,0.2f,1f,1,0,0,1);
-						splatterVelocity = new Vec2(0,0);
-						int newX;
-						int newY;
-						int n = -10 - 10 + 1;
-						int randX = rn.nextInt() % n;
-						int randY = rn.nextInt() % n;
-						newX = -10 + randX;
-						newY = -10 + randY;
-						splatterVelocity.x = Core.getBody().getLinearVelocity().x + newX;
-						splatterVelocity.y = Core.getBody().getLinearVelocity().x + newY;
-						newBox.getBody().setLinearVelocity(splatterVelocity);
-						gameController.createBox(newBox);
-					}
-					if(deathDirection==1){
-						splatterVelocity = new Vec2(10,0);
-						
-						int newY = 0;
-						int n = -10 - 10 + 1;
-						int randY = rn.nextInt() % n;
-						newY = -10 + randY;
-						splatterVelocity.y = newY;
-						
-						Box newBox = new Box(gameWorld,BodyType.DYNAMIC,false,x,y,0.2f,0.2f,1f,1,0,0,1);
-						newBox.getBody().setLinearVelocity(splatterVelocity);
-						gameController.createBox(newBox);
-					}
-					if(deathDirection==2){
-						splatterVelocity = new Vec2(-10,0);
-						int newY = 0;
-						int n = -10 - 10 + 1;
-						int randY = rn.nextInt() % n;
-						newY = -10 + randY;
-						splatterVelocity.y = newY;
-						Box newBox = new Box(gameWorld,BodyType.DYNAMIC,false,x-0.4f,y,0.2f,0.2f,1f,1,0,0,1);
-						newBox.getBody().setLinearVelocity(splatterVelocity);
-						gameController.createBox(newBox);
-					}
+					
+					Vec2 splatterVelocity = new Vec2((rn.nextFloat()*100)-50,(rn.nextFloat()*100)-50);
+					Box newBox = new Box(gameWorld,BodyType.DYNAMIC,false,x,y,rn.nextFloat()/3,rn.nextFloat()/3,1f,1,0,0,1);
+					int newX;
+					int newY;
+					int n = -10 - 10 + 1;
+					int randX = rn.nextInt() % n;
+					int randY = rn.nextInt() % n;
+					newX = -10 + randX;
+					newY = -10 + randY;
+					newBox.getBody().setLinearVelocity(splatterVelocity);
+					gameController.createBox(newBox);
+					
 					
 					hasDied=true;
 				}
 		 }
 		 
 	}
+	
+	
 
 }

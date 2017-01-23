@@ -53,8 +53,8 @@ public class WorldController {
     	
         gameLevel  = new Level(this,gameWorld,gameMouse,gameCharacter1);
 	    gameLevel.load_level("gamedata/Level_"+level+".xml");
-	    gameCharacter1.setControls(Keyboard.KEY_A,Keyboard.KEY_D , Keyboard.KEY_E, Keyboard.KEY_Q);
-	    gameCharacter2.setControls(Keyboard.KEY_J,Keyboard.KEY_L , Keyboard.KEY_O, Keyboard.KEY_U);
+	    gameCharacter1.setControls(Keyboard.KEY_A,Keyboard.KEY_D , Keyboard.KEY_E, Keyboard.KEY_Q,Keyboard.KEY_S,Keyboard.KEY_W);
+	    gameCharacter2.setControls(Keyboard.KEY_J,Keyboard.KEY_L , Keyboard.KEY_O, Keyboard.KEY_U,Keyboard.KEY_K,Keyboard.KEY_I);
 
 	    
 		
@@ -231,7 +231,10 @@ public class WorldController {
 		  }
 		  
 		  gameNPCs.clear();
-		 // gameCharacter.deleteBody();
+		  gameCharacter1.delete();
+		  gameCharacter2.delete();
+
+		 
 		  
 		  gameLevel.load_level("gamedata/Level_"+level+".xml");
 		  score=10;

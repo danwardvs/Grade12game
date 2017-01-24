@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
@@ -17,45 +14,35 @@ public class Main {
 	
 	World gameWorld;
 	
-	  /** time at last frame */
     long lastFrame;
-     
-    /** frames per second */
     int fps;
-    /** last fps time */
     long lastFPS;
     
 	boolean exit=false;
 	
-	   public int getDelta() {
-	        long time = getTime();
-	        int delta = (int) (time - lastFrame);
-	        lastFrame = time;
-	      
-	        return delta;
-	    }
-	     
-	    /**
-	     * Get the accurate system time
-	     * 
-	     * @return The system time in milliseconds
-	     */
-	    public long getTime() {
-	        return (Sys.getTime() * 1000) / Sys.getTimerResolution();
-	    }
-	     
-	    /**
-	     * Calculate the FPS and set it in the title bar
-	     */
-	    public void updateFPS() {
-	        if (getTime() - lastFPS > 1000) {
-	            Display.setTitle("FPS: 60");
+	public int getDelta() {
+        long time = getTime();
+        int delta = (int) (time - lastFrame);
+        lastFrame = time;
+      
+        return delta;
+    }
+    public long getTime() {
+        return (Sys.getTime() * 1000) / Sys.getTimerResolution();
+    }
+     
+    /**
+     * Calculate the FPS and set it in the title bar
+     */
+    public void updateFPS() {
+        if (getTime() - lastFPS > 1000) {
+            Display.setTitle("FPS: 60");
 
-	            fps = 0;
-	            lastFPS += 1000;
-	        }
-	        fps++;
-	    }
+            fps = 0;
+            lastFPS += 1000;
+        }
+        fps++;
+    }
 	
 	
 	private void start(){
@@ -105,26 +92,24 @@ public class Main {
 			float delta = getDelta();
 			updateFPS();
 			
-		   if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
+		    if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
 		    	exit=true;
 		    
-		       gameController.update((int)delta);
+		    gameController.update((int)delta);
 		       
-		       //Haxx for stepping world but idek
-		       gameWorld.step(delta/1000, 2, 6);
+		    //Haxx for stepping world but idek
+		    gameWorld.step(delta/1000, 2, 6);
 
-		       gameController.draw();
+		    gameController.draw();
 		        
 		   
-		        Display.update();
+		    Display.update();
 		        
-		        Display.sync(60);
-		    }
+		    Display.sync(60);
+		}
 		  
-		    Display.destroy();
+		Display.destroy();
 		    
-		    
-		
 	}
     
 	public static void main(String[] args) {
@@ -132,10 +117,6 @@ public class Main {
 		Main gameMain = new Main();
 		gameMain.start();
 
-		
-	    
-	    
-			
 	    
 	}
 

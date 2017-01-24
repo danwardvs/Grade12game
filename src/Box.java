@@ -65,10 +65,7 @@ public class Box {
 	public void applyTorque(float newTorque){
 		 body.applyTorque(newTorque);
 	}
-	public void applyLinearImpulse(float newX,float newY){
-		//body.ApplyLinearImpulse( new Vec2(0,50), body.getWorldCenter());
-		body.applyLinearImpulse(new Vec2(newX,newY), body.getPosition(), true);
-	}
+	
 	public void applyImpulse(float newX, float newY){
 		body.applyForceToCenter(new Vec2(newX,newY));
 	}
@@ -111,5 +108,5 @@ public class Box {
 	            
 	            
 	    GL11.glPopMatrix();
-		}
+	}
 }

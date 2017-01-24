@@ -14,7 +14,6 @@ public class Level {
 	World gameWorld;
 	WorldController gameController;
 	Character gameCharacter;
-	MouseHandler gameMouse;
 	String object_type;
 	float x;
 	float y;
@@ -33,9 +32,8 @@ public class Level {
 	
 	
 	
-	public Level(WorldController newWorldController, World newWorld, MouseHandler newMouse, Character newCharacter){
+	public Level(WorldController newWorldController, World newWorld,  Character newCharacter){
 		gameWorld = newWorld;
-		gameMouse = newMouse;
 		gameController = newWorldController;
 		gameCharacter = newCharacter;
 	}

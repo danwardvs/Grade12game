@@ -17,27 +17,18 @@ import org.lwjgl.Sys;
 
 public class WorldController {
 	
-		
-	
-	MouseHandler gameMouse = new MouseHandler();
+
 	KeyboardHandler gameKeyboard = new KeyboardHandler();
 	
 	int level = 1;
-	boolean buttonPressed;
 	    
-	int score = 10;
-	int BOX_AMOUNT = 25;
 	List<Box> gameBoxes = new ArrayList<Box>();
-	List<Projectile> gameProjectiles = new ArrayList<Projectile>();
-	List<NPC> gameNPCs = new ArrayList<NPC>();
 	List<Skeleton> gameSkeletons = new ArrayList<Skeleton>();
 	Character gameCharacter1;
 	Character gameCharacter2;
 
 	static World gameWorld;
 	Level gameLevel;
-	
-	  /** time at last frame */
 
     // Setup world
     //float timeStep = 1.0f/60.0f;
@@ -51,94 +42,25 @@ public class WorldController {
 	
     public void start() {
     	
-        gameLevel  = new Level(this,gameWorld,gameMouse,gameCharacter1);
+        gameLevel  = new Level(this,gameWorld,gameCharacter1);
 	    gameLevel.load_level("gamedata/Level_"+level+".xml");
 	    gameCharacter1.setControls(Keyboard.KEY_A,Keyboard.KEY_D , Keyboard.KEY_E, Keyboard.KEY_Q,Keyboard.KEY_S,Keyboard.KEY_W);
 	    gameCharacter2.setControls(Keyboard.KEY_J,Keyboard.KEY_L , Keyboard.KEY_O, Keyboard.KEY_U,Keyboard.KEY_K,Keyboard.KEY_I);
 
-	    
-		
 
    }
     
 	public void update(int delta){
 		
-
-    	//System.out.print(delta/1000);
-    	//System.out.println(" " + timeStep);
-    	//update((int)delta);
-    	
-    	
-    	
-    	
-  
-		 
 		gameCharacter1.update(delta);
 		gameCharacter2.update(delta);
 		
-		for(int j = 0; j < gameProjectiles.size(); j++)
-		{
-		    Projectile newProjectile = gameProjectiles.get(j);
-		    
-		    int result = newProjectile.update(delta);
-		    
-		    if(result==0){			    	
-		    	
-		        gameProjectiles.remove(j);
-		        
-		        break;
-		    }
-		    if(result==2){
-		    	//gameCharacter1.setState(false);
-		    }
-
-		}
 		
-		for(int j = 0; j < gameNPCs.size(); j++)
-		{
-		    NPC newNPC = gameNPCs.get(j);
-		    
-		    int result = newNPC.update();
-		    if(buttonPressed){
-		    	if(newNPC.getType().equals("ButtonTrigger")){
-		    		newNPC.deleteBody();
-		    		gameNPCs.remove(j);
-		    	}
-		    }
-		    
-		    if(result==1){			    	
-		    	score--;
-		        gameNPCs.remove(j);
-		        
-		        break;
-		        
-		    }else if(result==2){
-		    	gameNPCs.remove(j);
-		    	if(level!=3){
-		    		level++;
-			    	clearWorld();
-		    	}
-		    	else
-		    		Sys.alert("Yippee!", "You win! Thanks for playing.");
-		    	
-
-		        break;
-
-		    	
-		    }else if(result==3){
-		    	buttonPressed=true;
-		    	
-		    }
-		    
-
-		}
-		//System.out.println(gameProjectiles.size());
-		
-		
-	 }
+	}
 			 
 	public void draw(){
-		  // Clear the screen and depth buffer
+		
+		// Clear the screen and depth buffer
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);  
          
         GL11.glClearColor(1, 1, 1, 1);
@@ -147,29 +69,15 @@ public class WorldController {
              
         for(Box box: gameBoxes){
         	box.draw();
-
 	    } 
         
-        for(Box projectile: gameProjectiles){
-        	projectile.draw();
-        }
-        
-        for(Box NPC: gameNPCs){
-        	NPC.draw();
-        }
         for(Skeleton skeleton: gameSkeletons){
         	skeleton.draw();
         }
         
-        
-        
         gameCharacter1.draw();
         gameCharacter2.draw();
 
-       gameMouse.draw();
-        //GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
-
-		
 	}
 	 public void createBox(Box newBox){
 			
@@ -179,30 +87,13 @@ public class WorldController {
 	 
 	 public void createSkeleton(Skeleton newSkeleton){
 			
-			gameSkeletons.add(newSkeleton);
-		
-		} 
-	public int getRemainingBoxes(){
-		return score;
-	}
-	 
-	public void createProjectile(Projectile newProjectile){
-		
-		gameProjectiles.add(newProjectile);
-		
-	}
-	
-	public void createNPC(NPC newNPC){
-		
-		gameNPCs.add(newNPC);
-		
-	}
-	
+		gameSkeletons.add(newSkeleton);
+	} 
+
 	
 	public void createCharacter1(Character newCharacter){
 
-		gameCharacter1 = newCharacter;
-			
+		gameCharacter1 = newCharacter;		
 	} 
 	
 	public void createCharacter2(Character newCharacter){
@@ -211,49 +102,18 @@ public class WorldController {
 			
 	} 
 	public void clearWorld(){
-			buttonPressed=false;
+	
 		
-		  for(Box box: gameBoxes){
-	          box.deleteBody();
-
-		  }
-		  gameBoxes.clear();
+		for(Box box: gameBoxes){
+			box.deleteBody();
+		}
 		  
-		  for(Projectile projectile: gameProjectiles){
-	          projectile.deleteBody();
-
-		  }
-		  gameProjectiles.clear();
+		gameBoxes.clear();
+		gameCharacter1.delete();
+		gameCharacter2.delete(); 
 		  
-		  for(NPC NPC: gameNPCs){
-	          NPC.deleteBody();
-
-		  }
-		  
-		  gameNPCs.clear();
-		  gameCharacter1.delete();
-		  gameCharacter2.delete();
-
-		 
-		  
-		 start();
-		  //gameCharacter.body.setLinearVelocity(new Vec2(0,0));
+		start();
 		  
 		
 	}
-	
-
-    /** 
-     * Calculate how many milliseconds have passed 
-     * since last frame.
-     * 
-     * @return milliseconds passed since last frame 
-     */
-	
-
-		
-
-	   
-	  
-
 }

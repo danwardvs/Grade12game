@@ -38,7 +38,7 @@ public class Box {
 	    dynamicBox.setAsBox(width, height);
 	    FixtureDef fixtureDef = new FixtureDef();
 	    fixtureDef.shape = dynamicBox;
-	    fixtureDef.density = 1;
+	    fixtureDef.density = 1f;
 	    fixtureDef.friction = 0.3f;
 	    fixtureDef.isSensor = newIsSensor;
 	    body.createFixture(fixtureDef);

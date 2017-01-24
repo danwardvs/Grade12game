@@ -13,7 +13,6 @@ public class Level {
 	
 	World gameWorld;
 	WorldController gameController;
-	Character gameCharacter;
 	String object_type;
 	float x;
 	float y;
@@ -26,16 +25,10 @@ public class Level {
 	int character_id;
 	String body_type;
 	String itemtype;
-	String directionString;
-	Boolean direction=false;
 	
-	
-	
-	
-	public Level(WorldController newWorldController, World newWorld,  Character newCharacter){
+	public Level(WorldController newWorldController, World newWorld){
 		gameWorld = newWorld;
 		gameController = newWorldController;
-		gameCharacter = newCharacter;
 	}
 	
 	public void load_level(String newLevelPath){
@@ -53,8 +46,7 @@ public class Level {
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 
 				Node nNode = nList.item(temp);
-						
-						
+								
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
 					Element eElement = (Element) nNode;
@@ -62,29 +54,15 @@ public class Level {
 					object_type = (eElement.getAttribute("type"));
 					x = Float.valueOf(eElement.getElementsByTagName("x").item(0).getTextContent());
 					y = Float.valueOf(eElement.getElementsByTagName("y").item(0).getTextContent());
-					width = Float.valueOf(eElement.getElementsByTagName("width").item(0).getTextContent());
-					height = Float.valueOf(eElement.getElementsByTagName("height").item(0).getTextContent());
-					angle = Float.valueOf(eElement.getElementsByTagName("angle").item(0).getTextContent());
 					r = Float.valueOf(eElement.getElementsByTagName("r").item(0).getTextContent());
 					g = Float.valueOf(eElement.getElementsByTagName("g").item(0).getTextContent());
 					b = Float.valueOf(eElement.getElementsByTagName("b").item(0).getTextContent());
 					
-					if(object_type.equals("Item")){
-						itemtype = (eElement.getElementsByTagName("itemtype").item(0).getTextContent());
-						
-						if(itemtype.equals("Enemy")){
-							directionString = (eElement.getElementsByTagName("direction").item(0).getTextContent());
-							if(directionString.equals("Right"))
-								direction=true;
-							else
-								direction=false;
-						}
-					}
-
-
-					
 					if(object_type.equals("Box")){
 						
+						width = Float.valueOf(eElement.getElementsByTagName("width").item(0).getTextContent());
+						height = Float.valueOf(eElement.getElementsByTagName("height").item(0).getTextContent());
+						angle = Float.valueOf(eElement.getElementsByTagName("angle").item(0).getTextContent());
 						body_type = eElement.getElementsByTagName("bodytype").item(0).getTextContent();
 
 						
@@ -99,29 +77,21 @@ public class Level {
 						
 						character_id = Integer.valueOf(eElement.getElementsByTagName("character_id").item(0).getTextContent());;
 				
-						
-			
 						if(character_id==1){
-							gameCharacter = new Character(gameWorld,gameController,x,y,r,g,b);
+							Character gameCharacter = new Character(gameWorld,gameController,x,y,r,g,b);
 							gameController.createCharacter1(gameCharacter);
 						}
 						if(character_id==2){
-							gameCharacter = new Character(gameWorld,gameController,x,y,r,g,b);
+							Character gameCharacter = new Character(gameWorld,gameController,x,y,r,g,b);
 							gameController.createCharacter2(gameCharacter);
 						}
-					}
-					if(object_type.equals("NPC")){
-					
-					
-						gameController.createSkeleton(new Skeleton(gameWorld,gameController,x,y,r,g,b));
-						
 					}
 
 				}
 			}
-		    } catch (Exception e) {
-		    	e.printStackTrace();
-		    }
+		} catch (Exception e) {
+    	e.printStackTrace();
+    	}
 	}
 
 }

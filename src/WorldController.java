@@ -1,25 +1,13 @@
 import java.util.List;
 import java.util.ArrayList;
-
-import org.jbox2d.collision.shapes.PolygonShape;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.World;
-import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.Sys;
 
 
 public class WorldController {
 	
 
-	KeyboardHandler gameKeyboard = new KeyboardHandler();
-	
 	int level = 1;
 	    
 	List<Box> gameBoxes = new ArrayList<Box>();
@@ -42,21 +30,40 @@ public class WorldController {
 	
     public void start() {
     	
-        gameLevel  = new Level(this,gameWorld,gameCharacter1);
+        gameLevel  = new Level(this,gameWorld);
 	    gameLevel.load_level("gamedata/Level_"+level+".xml");
 	    gameCharacter1.setControls(Keyboard.KEY_A,Keyboard.KEY_D , Keyboard.KEY_E, Keyboard.KEY_Q,Keyboard.KEY_S,Keyboard.KEY_W);
 	    gameCharacter2.setControls(Keyboard.KEY_J,Keyboard.KEY_L , Keyboard.KEY_O, Keyboard.KEY_U,Keyboard.KEY_K,Keyboard.KEY_I);
 
 
-   }
+    }
+    
+    public void loadLevel(int newLevel){
+    	level = newLevel;
+    	clearWorld();
+    }
     
 	public void update(int delta){
+		
+		if(Keyboard.isKeyDown(Keyboard.KEY_1)){
+			loadLevel(1);
+		}
+		
+		if(Keyboard.isKeyDown(Keyboard.KEY_2)){
+			loadLevel(2);
+		}
+		
+		if(Keyboard.isKeyDown(Keyboard.KEY_3)){
+			loadLevel(3);
+		}
+		
 		
 		gameCharacter1.update(delta);
 		gameCharacter2.update(delta);
 		
 		
 	}
+	
 			 
 	public void draw(){
 		
@@ -109,6 +116,7 @@ public class WorldController {
 		}
 		  
 		gameBoxes.clear();
+		
 		gameCharacter1.delete();
 		gameCharacter2.delete(); 
 		  

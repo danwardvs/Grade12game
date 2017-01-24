@@ -1,16 +1,12 @@
 import java.util.List;
 import java.util.ArrayList;
 
-import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
-import org.jbox2d.dynamics.FixtureDef;
 import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.joints.RevoluteJoint;
 import org.jbox2d.dynamics.joints.RevoluteJointDef;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 public class Skeleton {
@@ -213,11 +209,6 @@ public class Skeleton {
 	public float getY(){
 		return Core.getBody().getPosition().y;
 	}
-	
-	public void update(){
-		
-	
-	}
 	public void drawRect(float angle,float x, float y, float width, float height, Colour newColour){
 		
 		// draw quad
@@ -252,12 +243,9 @@ public class Skeleton {
 	
 	public void draw(){
 		 
-		
 		for(Box newBones: boneList){
 	       	newBones.draw();
 	    }
-	
-
 
 		drawRect(Head.getBody().getAngle(),(Head.getX() - 0.2f)*20,(Head.getY() + 0.1f)*20,4f,4f,Blue);
 		drawRect(Head.getBody().getAngle(),(Head.getX() + 0.2f)*20,(Head.getY() + 0.1f)*20,4f,4f,Blue);

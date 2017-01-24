@@ -113,12 +113,12 @@ public class Character extends Skeleton {
 				 	
 				 	RightKnee.getJoint().setMotorSpeed(-100);
 				 	RightKnee.getJoint().enableMotor(true);
-				 	RightHip.getJoint().enableLimit(false);
+				 	//RightKnee.getJoint().enableLimit(false);
 
 				 	
 				 	RightAnkle.getJoint().setMotorSpeed(-100);
 				 	RightAnkle.getJoint().enableMotor(true);
-				 	RightHip.getJoint().enableLimit(false);
+				 	//RightAnkle.getJoint().enableLimit(false);
 
 				 	Core.getBody().applyAngularImpulse(0.1f);
 					Core.getBody().applyForceToCenter(new Vec2(10f,0));
@@ -149,12 +149,12 @@ public class Character extends Skeleton {
 				 	
 				 	LeftKnee.getJoint().setMotorSpeed(100);
 				 	LeftKnee.getJoint().enableMotor(true);
-				 	LeftHip.getJoint().enableLimit(false);
+				 	//LeftKnee.getJoint().enableLimit(false);
 
 				 	
 				 	LeftAnkle.getJoint().setMotorSpeed(100);
 				 	LeftAnkle.getJoint().enableMotor(true);
-				 	LeftHip.getJoint().enableLimit(false);
+				 	//LeftAnkle.getJoint().enableLimit(false);
 
 				 	Core.getBody().applyAngularImpulse(-0.1f);
 				 	Core.getBody().applyForceToCenter(new Vec2(-10f,0));

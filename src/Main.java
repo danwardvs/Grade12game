@@ -36,7 +36,7 @@ public class Main {
      */
     public void updateFPS() {
         if (getTime() - lastFPS > 1000) {
-            Display.setTitle("FPS: 60");
+            Display.setTitle("Extreme Sumo Wrestling");
 
             fps = 0;
             lastFPS += 1000;

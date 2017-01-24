@@ -178,7 +178,6 @@ public class Skeleton {
         
    
         newJoint.setJoint((RevoluteJoint) gameWorld.createJoint(jd));
-        System.out.println(newJoint);
         
     
 		return newBox;	

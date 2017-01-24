@@ -24,6 +24,7 @@ public class Level {
 	float r;
 	float g;
 	float b;
+	int character_id;
 	String body_type;
 	String itemtype;
 	String directionString;
@@ -69,7 +70,7 @@ public class Level {
 					r = Float.valueOf(eElement.getElementsByTagName("r").item(0).getTextContent());
 					g = Float.valueOf(eElement.getElementsByTagName("g").item(0).getTextContent());
 					b = Float.valueOf(eElement.getElementsByTagName("b").item(0).getTextContent());
-					body_type = (eElement.getElementsByTagName("bodytype").item(0).getTextContent());
+					
 					if(object_type.equals("Item")){
 						itemtype = (eElement.getElementsByTagName("itemtype").item(0).getTextContent());
 						
@@ -85,6 +86,10 @@ public class Level {
 
 					
 					if(object_type.equals("Box")){
+						
+						body_type = eElement.getElementsByTagName("bodytype").item(0).getTextContent();
+
+						
 						if(body_type.equals("KINEMATIC")){
 							gameController.createBox(new Box(gameWorld,BodyType.KINEMATIC,false,x,y,width,height,angle,r,g,b,1));
 						}
@@ -93,13 +98,17 @@ public class Level {
 						}
 					}
 					if(object_type.equals("Character")){
+						
+						character_id = Integer.valueOf(eElement.getElementsByTagName("character_id").item(0).getTextContent());;
+				
+						
 			
-						if(body_type.equals("1")){
-							gameCharacter = new Character(gameWorld,gameController,gameMouse,x,y,r,g,b);
+						if(character_id==1){
+							gameCharacter = new Character(gameWorld,gameController,x,y,r,g,b);
 							gameController.createCharacter1(gameCharacter);
 						}
-						if(body_type.equals("2")){
-							gameCharacter = new Character(gameWorld,gameController,gameMouse,x,y,r,g,b);
+						if(character_id==2){
+							gameCharacter = new Character(gameWorld,gameController,x,y,r,g,b);
 							gameController.createCharacter2(gameCharacter);
 						}
 					}

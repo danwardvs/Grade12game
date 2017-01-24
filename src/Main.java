@@ -91,7 +91,7 @@ public class Main {
 	    PolygonShape groundBox = new PolygonShape();
 	    groundBox.setAsBox(800, 0);
 	    groundBody.createFixture(groundBox, 0);
-	    gameWorld.setSleepingAllowed(false);
+	    gameWorld.setSleepingAllowed(true);
 
 	
 		

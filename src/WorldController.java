@@ -236,8 +236,7 @@ public class WorldController {
 
 		 
 		  
-		  gameLevel.load_level("gamedata/Level_"+level+".xml");
-		  score=10;
+		 start();
 		  //gameCharacter.body.setLinearVelocity(new Vec2(0,0));
 		  
 		

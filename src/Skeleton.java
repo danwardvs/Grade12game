@@ -94,7 +94,7 @@ public class Skeleton {
 
 		RightThigh = createBodyPart(RightHip,Core.getBody(),newX+0.25f,newY-1f,0.2f,0.5f,newX+0.25f,newY-0.5f,true,0.3f,0.7f,0.5f,Blue);
 		RightShin = createBodyPart(RightKnee,RightThigh.getBody(),newX+0.25f,newY-2f,0.2f,0.5f,newX+0.25f,newY-1.5f,true,-0.6f,-0.4f,-0.5f,Skin);
-		RightFoot = createBodyPart(RightAnkle,RightShin.getBody(),newX+0.5f,newY-2.5f,0.5f,0.2f,newX+0.25f,newY-2.5f,true,0,0.2f,0,Black);
+		RightFoot = createBodyPart(RightAnkle,RightShin.getBody(),newX+0.5f,newY-2.5f,0.5f,0.2f,newX+0.25f,newY-2.5f,true,-0.2f,0.2f,0,Black);
 			
 		RightUpperArm = createBodyPart(RightShoulder,Core.getBody(),newX-0.75f,newY,0.2f,0.5f,newX-0.75f,newY+0.25f,false,-3.0f,2.0f,0,Red);
 		RightForearm = createBodyPart(RightElbow,RightUpperArm.getBody(),newX-0.75f,newY-0.5f,0.2f,0.5f,newX-0.75f,newY-0.25f,false,0,0,0,Skin);

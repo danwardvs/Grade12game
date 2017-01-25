@@ -98,7 +98,10 @@ public class Main {
 		    gameController.update((int)delta);
 		       
 		    //Haxx for stepping world but idek
+		  
 		    gameWorld.step(delta/1000, 2, 6);
+		  
+
 
 		    gameController.draw();
 		        

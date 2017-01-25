@@ -102,14 +102,11 @@ public class Character extends Skeleton {
 		if(jump_timer>255)
 			jump_timer=255;
 	
-		if (Keyboard.isKeyDown(Keyboard.KEY_R)){
+		if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
 			 gameController.clearWorld();
 		 }
 		
 		 if(alive){
-			 if(Keyboard.isKeyDown(Keyboard.KEY_P)){
-				alive=false;
-			 }
 
 			 if(Keyboard.isKeyDown(control_right_leg)){
 				 

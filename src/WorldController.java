@@ -1,5 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
+
+import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -25,6 +27,10 @@ public class WorldController {
     public WorldController(World newWorld){
     	gameWorld = newWorld;
   
+    }
+    
+    public void setGravity(float newX, float newY){
+    	gameWorld.setGravity(new Vec2(newX,newY));
     }
 	
     public void start() {

@@ -40,12 +40,17 @@ public class Level {
 			Document doc = dBuilder.parse(fXmlFile);
 					
 			doc.getDocumentElement().normalize();
+			
+
+			
+			
 					
 			NodeList nList = doc.getElementsByTagName("object");
 					
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 
 				Node nNode = nList.item(temp);
+				
 								
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
@@ -54,11 +59,13 @@ public class Level {
 					object_type = (eElement.getAttribute("type"));
 					x = Float.valueOf(eElement.getElementsByTagName("x").item(0).getTextContent());
 					y = Float.valueOf(eElement.getElementsByTagName("y").item(0).getTextContent());
-					r = Float.valueOf(eElement.getElementsByTagName("r").item(0).getTextContent());
-					g = Float.valueOf(eElement.getElementsByTagName("g").item(0).getTextContent());
-					b = Float.valueOf(eElement.getElementsByTagName("b").item(0).getTextContent());
+					
 					
 					if(object_type.equals("Box")){
+						
+						r = Float.valueOf(eElement.getElementsByTagName("r").item(0).getTextContent());
+						g = Float.valueOf(eElement.getElementsByTagName("g").item(0).getTextContent());
+						b = Float.valueOf(eElement.getElementsByTagName("b").item(0).getTextContent());
 						
 						width = Float.valueOf(eElement.getElementsByTagName("width").item(0).getTextContent());
 						height = Float.valueOf(eElement.getElementsByTagName("height").item(0).getTextContent());
@@ -80,6 +87,11 @@ public class Level {
 					
 						Character gameCharacter = new Character(gameWorld,gameController,character_id,x,y,r,g,b);
 						gameController.createCharacter(gameCharacter,character_id);
+					}
+					
+					if(object_type.equals("Gravity")){
+						
+						gameController.setGravity(x, y);
 					}
 
 				}

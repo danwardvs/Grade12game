@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="res/jbox2d.jar"/>
+	<classpathentry kind="lib" path="res/jbox2d.jar" sourcepath="/home/danwardvs/Documents/jbox2d/jbox2d-library/src"/>
 	<classpathentry kind="lib" path="res/lwjgl_util.jar"/>
 	<classpathentry kind="lib" path="res/lwjgl.jar">
 		<attributes>

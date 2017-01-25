@@ -9,6 +9,8 @@ public class Character extends Skeleton {
 	
 	boolean hasDied = false;
 	
+	int id;
+	
 	int control_right_leg;
 	int control_left_leg;
 	int control_right_arm;
@@ -26,9 +28,10 @@ public class Character extends Skeleton {
 	
 	Random rn = new Random();
 
-	public Character(World newWorld,WorldController newWorldController, float newX, float newY,float newR,float newG,float newB){
+	public Character(World newWorld,WorldController newWorldController, int newId, float newX, float newY,float newR,float newG,float newB){
 		
 		super(newWorld,newWorldController,newX, newY,newR,newG,newB);
+		id = newId;
 	}
 	
 
@@ -43,18 +46,28 @@ public class Character extends Skeleton {
 	
 	public void draw(){
 		super.draw();
-		if(gameController.gameCharacter1==this){
-			
-			drawRect(0,-250,250,200,40,new Colour((float)255-ult_timer,(float)ult_timer,0f,true));
-			drawRect(0,-250,200,200,40,new Colour((float)255-jump_timer,(float)jump_timer,0f,true));
+		
+		int x=0;
+		
+		if(id==0)
+			x=-250;
+		if(id==1)
+			x=250;
+		
+		
+		if(ult_timer==255)
+			drawRect(0,x,250,220,50,new Colour((float)255-ult_timer,(float)ult_timer,0f,true));
+		else
+			drawRect(0,x,250,200,40,new Colour((float)255-ult_timer,(float)ult_timer,0f,true));
 
-		}
-		if(gameController.gameCharacter2==this){
-			
-			drawRect(0,250,250,200,40,new Colour((float)255-ult_timer,(float)ult_timer,0f,true));
-			drawRect(0,250,200,200,40,new Colour((float)255-jump_timer,(float)jump_timer,0f,true));
+		
+		if(jump_timer==255)
+			drawRect(0,x,180,220,50,new Colour((float)255-jump_timer,(float)jump_timer,0f,true));
+		else
+			drawRect(0,x,180,200,40,new Colour((float)255-jump_timer,(float)jump_timer,0f,true));
 
-		}
+
+		
 	}
 	
 	public void delete(){
@@ -69,7 +82,7 @@ public class Character extends Skeleton {
 		ult_frame+=delta;
 	
 
-		if(ult_frame>100){
+		if(ult_frame>50){
 			ult_timer++;
 			ult_frame=0;
 		}
@@ -81,7 +94,7 @@ public class Character extends Skeleton {
 		jump_frame+=delta;
 		
 
-		if(jump_frame>50){
+		if(jump_frame>25){
 			jump_timer++;
 			jump_frame=0;
 		}

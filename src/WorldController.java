@@ -12,8 +12,7 @@ public class WorldController {
 	    
 	List<Box> gameBoxes = new ArrayList<Box>();
 	List<Skeleton> gameSkeletons = new ArrayList<Skeleton>();
-	Character gameCharacter1;
-	Character gameCharacter2;
+	Character[] gameCharacters =  new Character[4];
 
 	static World gameWorld;
 	Level gameLevel;
@@ -32,8 +31,8 @@ public class WorldController {
     	
         gameLevel  = new Level(this,gameWorld);
 	    gameLevel.load_level("gamedata/Level_"+level+".xml");
-	    gameCharacter1.setControls(Keyboard.KEY_A,Keyboard.KEY_D , Keyboard.KEY_E, Keyboard.KEY_Q,Keyboard.KEY_S,Keyboard.KEY_W);
-	    gameCharacter2.setControls(Keyboard.KEY_J,Keyboard.KEY_L , Keyboard.KEY_O, Keyboard.KEY_U,Keyboard.KEY_K,Keyboard.KEY_I);
+	    gameCharacters[0].setControls(Keyboard.KEY_A,Keyboard.KEY_D , Keyboard.KEY_E, Keyboard.KEY_Q,Keyboard.KEY_S,Keyboard.KEY_W);
+	    gameCharacters[1].setControls(Keyboard.KEY_J,Keyboard.KEY_L , Keyboard.KEY_O, Keyboard.KEY_U,Keyboard.KEY_K,Keyboard.KEY_I);
 
 
     }
@@ -58,8 +57,10 @@ public class WorldController {
 		}
 		
 		
-		gameCharacter1.update(delta);
-		gameCharacter2.update(delta);
+		for(int i = 0; i<4; i++){
+        	if(gameCharacters[i]!=null)
+        		gameCharacters[i].update(delta);
+        };
 		
 		
 	}
@@ -82,8 +83,10 @@ public class WorldController {
         	skeleton.draw();
         }
         
-        gameCharacter1.draw();
-        gameCharacter2.draw();
+        for(int i = 0; i<4; i++){
+        	if(gameCharacters[i]!=null)
+        		gameCharacters[i].draw();
+        }
 
 	}
 	 public void createBox(Box newBox){
@@ -98,16 +101,11 @@ public class WorldController {
 	} 
 
 	
-	public void createCharacter1(Character newCharacter){
+	public void createCharacter(Character newCharacter, int newIndex){
 
-		gameCharacter1 = newCharacter;		
+		gameCharacters[newIndex] = newCharacter;		
 	} 
 	
-	public void createCharacter2(Character newCharacter){
-
-		gameCharacter2 = newCharacter;
-			
-	} 
 	public void clearWorld(){
 	
 		
@@ -117,8 +115,11 @@ public class WorldController {
 		  
 		gameBoxes.clear();
 		
-		gameCharacter1.delete();
-		gameCharacter2.delete(); 
+		for(int i = 0; i<4; i++){
+        	if(gameCharacters[i]!=null)
+        		gameCharacters[i].delete();
+        };
+		
 		  
 		start();
 		  

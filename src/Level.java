@@ -77,14 +77,9 @@ public class Level {
 						
 						character_id = Integer.valueOf(eElement.getElementsByTagName("character_id").item(0).getTextContent());;
 				
-						if(character_id==1){
-							Character gameCharacter = new Character(gameWorld,gameController,x,y,r,g,b);
-							gameController.createCharacter1(gameCharacter);
-						}
-						if(character_id==2){
-							Character gameCharacter = new Character(gameWorld,gameController,x,y,r,g,b);
-							gameController.createCharacter2(gameCharacter);
-						}
+					
+						Character gameCharacter = new Character(gameWorld,gameController,character_id,x,y,r,g,b);
+						gameController.createCharacter(gameCharacter,character_id);
 					}
 
 				}

@@ -18,10 +18,14 @@ public class Skeleton {
 	float g;
 	float b;
 	
-	Colour Black = new Colour(0.2f,0.2f,0.2f,false);
-	Colour Skin = new Colour(255,201,180,true);
-	Colour Blue = new Colour(50,50,255,true);
-	Colour Red = new Colour(255,50,50,true);
+	float x;
+	float y;
+	
+
+	
+	Colour colour_shorts = Colour.Blue;
+	Colour colour_shirt = Colour.Blue;
+	
 	
 
 	List<Box> boneList = new ArrayList<Box>();
@@ -71,38 +75,29 @@ public class Skeleton {
 	
 	
 	
-	
-	public Skeleton(World newWorld,WorldController newWorldController, float newX, float newY,float newR,float newG,float newB){
+	public void createSkeleton(float newX,float newY,Colour newShirtColour,Colour newShortsColour){
+		Core = new Box(gameWorld,BodyType.DYNAMIC,false,newX,newY,0.5f,0.7f,0,newShirtColour.r,newShirtColour.g,newShirtColour.b,1);
 		
-		gameWorld = newWorld;
-		gameController = newWorldController;
 		
-		r = newR;
-		g = newG;
-		b = newB;
-		
-		Core = new Box(newWorld,BodyType.DYNAMIC,false,newX,newY,0.5f,0.7f,0,Red.r,Red.g,Red.b,1);
-		
-			
-		LeftThigh = createBodyPart(LeftHip,Core.getBody(),newX-0.25f,newY-1f,0.2f,0.5f,newX-0.25f,newY-0.5f,true,-0.7f,-0.3f,-0.5f,Blue);
-		LeftShin = createBodyPart(LeftKnee,LeftThigh.getBody(),newX-0.25f,newY-2f,0.2f,0.5f,newX-0.25f,newY-1.5f,true,0.4f,0.6f,0.5f,Skin);
-		LeftFoot = createBodyPart(LeftAnkle,LeftShin.getBody(),newX-0.5f,newY-2.5f,0.5f,0.2f,newX-0.25f,newY-2.5f,true,-0.2f,0,0,Black);
+		LeftThigh = createBodyPart(LeftHip,Core.getBody(),newX-0.25f,newY-1f,0.2f,0.5f,newX-0.25f,newY-0.5f,true,-0.7f,-0.3f,-0.5f,newShortsColour);
+		LeftShin = createBodyPart(LeftKnee,LeftThigh.getBody(),newX-0.25f,newY-2f,0.2f,0.5f,newX-0.25f,newY-1.5f,true,0.4f,0.6f,0.5f,Colour.Skin);
+		LeftFoot = createBodyPart(LeftAnkle,LeftShin.getBody(),newX-0.5f,newY-2.5f,0.5f,0.2f,newX-0.25f,newY-2.5f,true,-0.2f,0,0,Colour.Black);
 
-		RightThigh = createBodyPart(RightHip,Core.getBody(),newX+0.25f,newY-1f,0.2f,0.5f,newX+0.25f,newY-0.5f,true,0.3f,0.7f,0.5f,Blue);
-		RightShin = createBodyPart(RightKnee,RightThigh.getBody(),newX+0.25f,newY-2f,0.2f,0.5f,newX+0.25f,newY-1.5f,true,-0.6f,-0.4f,-0.5f,Skin);
-		RightFoot = createBodyPart(RightAnkle,RightShin.getBody(),newX+0.5f,newY-2.5f,0.5f,0.2f,newX+0.25f,newY-2.5f,true,-0.2f,0.2f,0,Black);
+		RightThigh = createBodyPart(RightHip,Core.getBody(),newX+0.25f,newY-1f,0.2f,0.5f,newX+0.25f,newY-0.5f,true,0.3f,0.7f,0.5f,newShortsColour);
+		RightShin = createBodyPart(RightKnee,RightThigh.getBody(),newX+0.25f,newY-2f,0.2f,0.5f,newX+0.25f,newY-1.5f,true,-0.6f,-0.4f,-0.5f,Colour.Skin);
+		RightFoot = createBodyPart(RightAnkle,RightShin.getBody(),newX+0.5f,newY-2.5f,0.5f,0.2f,newX+0.25f,newY-2.5f,true,-0.2f,0.2f,0,Colour.Black);
 			
-		RightUpperArm = createBodyPart(RightShoulder,Core.getBody(),newX-0.75f,newY,0.2f,0.5f,newX-0.75f,newY+0.25f,false,-3.0f,2.0f,0,Red);
-		RightForearm = createBodyPart(RightElbow,RightUpperArm.getBody(),newX-0.75f,newY-0.5f,0.2f,0.5f,newX-0.75f,newY-0.25f,false,0,0,0,Skin);
-		RightHand = createBodyPart(RightWrist,RightForearm.getBody(),newX-0.75f,newY-1f,0.3f,0.3f,newX-0.75f,newY-0.75f,false,0,0,0,Skin);
+		RightUpperArm = createBodyPart(RightShoulder,Core.getBody(),newX-0.75f,newY,0.2f,0.5f,newX-0.75f,newY+0.25f,false,-3.0f,2.0f,0,newShirtColour);
+		RightForearm = createBodyPart(RightElbow,RightUpperArm.getBody(),newX-0.75f,newY-0.5f,0.2f,0.5f,newX-0.75f,newY-0.25f,false,0,0,0,Colour.Skin);
+		RightHand = createBodyPart(RightWrist,RightForearm.getBody(),newX-0.75f,newY-1f,0.3f,0.3f,newX-0.75f,newY-0.75f,false,0,0,0,Colour.Skin);
 			
-		LeftUpperArm = createBodyPart(LeftShoulder,Core.getBody(),newX+0.75f,newY,0.2f,0.5f,newX+0.75f,newY+0.25f,false,0,0,0,Red);
-		LeftForearm = createBodyPart(LeftElbow,LeftUpperArm.getBody(),newX+0.75f,newY-0.5f,0.2f,0.5f,newX+0.75f,newY-0.25f,false,0,0,0,Skin);
-		LeftHand = createBodyPart(LeftWrist,LeftForearm.getBody(),newX+0.75f,newY-1f,0.3f,0.3f,newX+0.75f,newY-0.75f,false,0,0,0,Skin);
+		LeftUpperArm = createBodyPart(LeftShoulder,Core.getBody(),newX+0.75f,newY,0.2f,0.5f,newX+0.75f,newY+0.25f,false,0,0,0,newShirtColour);
+		LeftForearm = createBodyPart(LeftElbow,LeftUpperArm.getBody(),newX+0.75f,newY-0.5f,0.2f,0.5f,newX+0.75f,newY-0.25f,false,0,0,0,Colour.Skin);
+		LeftHand = createBodyPart(LeftWrist,LeftForearm.getBody(),newX+0.75f,newY-1f,0.3f,0.3f,newX+0.75f,newY-0.75f,false,0,0,0,Colour.Skin);
 			
-		Neck = createBodyPart(LowerNeck,Core.getBody(),newX,newY+0.75f,0.3f,0.2f,newX,newY+0.75f,true,0,0,0,Skin);
+		Neck = createBodyPart(LowerNeck,Core.getBody(),newX,newY+0.75f,0.3f,0.2f,newX,newY+0.75f,true,0,0,0,Colour.Skin);
 			
-		Head = createBodyPart(UpperNeck,Neck.body,newX,newY+1.25f,0.4f,0.4f,newX,newY+1.25f,true,0,0,0,Skin);
+		Head = createBodyPart(UpperNeck,Neck.body,newX,newY+1.25f,0.4f,0.4f,newX,newY+1.25f,true,0,0,0,Colour.Skin);
 		
 		boneList.add(LeftThigh);
 		boneList.add(LeftShin);
@@ -141,7 +136,12 @@ public class Skeleton {
 		jointList.add(UpperNeck);
 		jointList.add(LowerNeck);
 		
+	}
 	
+	public Skeleton(World newWorld,WorldController newWorldController, float newX, float newY){
+
+		gameWorld = newWorld;
+		gameController = newWorldController;
 		
 		
 		
@@ -247,9 +247,9 @@ public class Skeleton {
 	       	newBones.draw();
 	    }
 
-		drawRect(Head.getBody().getAngle(),(Head.getX() - 0.2f)*20,(Head.getY() + 0.1f)*20,4f,4f,Blue);
-		drawRect(Head.getBody().getAngle(),(Head.getX() + 0.2f)*20,(Head.getY() + 0.1f)*20,4f,4f,Blue);
-		drawRect(Head.getBody().getAngle(),(Head.getX())*20,(Head.getY() - 0.2f)*20,8f,4f,Red);
+		drawRect(Head.getBody().getAngle(),(Head.getX() - 0.2f)*20,(Head.getY() + 0.1f)*20,4f,4f,Colour.Blue);
+		drawRect(Head.getBody().getAngle(),(Head.getX() + 0.2f)*20,(Head.getY() + 0.1f)*20,4f,4f,Colour.Blue);
+		drawRect(Head.getBody().getAngle(),(Head.getX())*20,(Head.getY() - 0.2f)*20,8f,4f,Colour.Red);
 
 
 		 

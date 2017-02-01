@@ -10,6 +10,7 @@ public class Character extends Skeleton {
 	boolean hasDied = false;
 	
 	int id;
+
 	
 	int control_right_leg;
 	int control_left_leg;
@@ -28,9 +29,11 @@ public class Character extends Skeleton {
 	
 	Random rn = new Random();
 
-	public Character(World newWorld,WorldController newWorldController, int newId, float newX, float newY,float newR,float newG,float newB){
+	public Character(World newWorld,WorldController newWorldController,Colour newShirtColour, Colour newShortsColour, int newId, float newX, float newY,float newR,float newG,float newB){
 		
-		super(newWorld,newWorldController,newX, newY,newR,newG,newB);
+		super(newWorld,newWorldController,newX, newY);
+		
+		createSkeleton(newX,newY,newShortsColour,newShirtColour);
 		id = newId;
 	}
 	
@@ -53,6 +56,7 @@ public class Character extends Skeleton {
 			x=-250;
 		if(id==1)
 			x=250;
+		System.out.println(id);
 		
 		
 		if(ult_timer==255)

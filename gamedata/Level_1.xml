@@ -12,7 +12,10 @@
 		<width>0.5</width>
 		<height>1</height>
 		<angle>0</angle>
-		<character_id>0</character_id>
+	<character_id>0</character_id>
+		<shirt_colour>Blue</shirt_colour>
+		<shorts_colour>Black</shorts_colour>
+		
 	</object>
 	
 
@@ -23,6 +26,9 @@
 		<height>1</height>
 		<angle>0</angle>
 		<character_id>1</character_id>
+		<shirt_colour>Red</shirt_colour>
+		<shorts_colour>Green</shorts_colour>
+		
 	</object>
 	
 

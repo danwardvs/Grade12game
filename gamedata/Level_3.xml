@@ -3,12 +3,12 @@
 	
 	<object type="Gravity">
 		<x>0</x>
-		<y>-1</y>
+		<y>-10</y>
 	</object>
 
 	<object type="Character">
-		<x>-5</x>
-		<y>-2</y>
+		<x>-15</x>
+		<y>10</y>
 		<width>0.5</width>
 		<height>1</height>
 		<angle>0</angle>
@@ -19,8 +19,8 @@
 	</object>
 
 	<object type="Character">
-		<x>5</x>
-		<y>-2</y>
+		<x>15</x>
+		<y>10</y>
 		<width>0.5</width>
 		<height>1</height>
 		<angle>0</angle>
@@ -35,7 +35,7 @@
 
 	<object type="Box">
 		<x>0</x>
-		<y>-15</y>
+		<y>-10</y>
 		<width>10</width>
 		<height>10</height>
 		<angle>0</angle>

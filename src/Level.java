@@ -11,6 +11,11 @@ import org.jbox2d.dynamics.World;
 
 public class Level {
 	
+	Colour Black = new Colour(0.2f,0.2f,0.2f,false);
+	Colour Skin = new Colour(255,201,180,true);
+	Colour Blue = new Colour(50,50,255,true);
+	Colour Red = new Colour(255,50,50,true);
+	
 	World gameWorld;
 	WorldController gameController;
 	String object_type;
@@ -83,9 +88,11 @@ public class Level {
 					if(object_type.equals("Character")){
 						
 						character_id = Integer.valueOf(eElement.getElementsByTagName("character_id").item(0).getTextContent());;
-				
+						String shorts_colour = eElement.getElementsByTagName("shorts_colour").item(0).getTextContent();;
+						String shirt_colour = eElement.getElementsByTagName("shirt_colour").item(0).getTextContent();;
+						System.out.println(character_id);
 					
-						Character gameCharacter = new Character(gameWorld,gameController,character_id,x,y,r,g,b);
+						Character gameCharacter = new Character(gameWorld,gameController,Colour.ColourFromString(shorts_colour),Colour.ColourFromString(shirt_colour),character_id,x,y,r,g,b);
 						gameController.createCharacter(gameCharacter,character_id);
 					}
 					
